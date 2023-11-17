@@ -2,7 +2,7 @@
 
 ## Group members
 
-- Arthur Henrique - (Matrícula)
+- Arthur Henrique - 211026673
 - Artur Padoves - (Matrícula)
 - Luiz Henrique - (Matrícula)
 - Gustavo de Paula - (Matrícula)
@@ -28,6 +28,13 @@ Create interface for a user to create local activity plans
 and a list of steps selected for the plan.
 - Business Rules: The user must select only the predefined steps, some steps may require others to
 be executed first, if selected, the previous steps must be added as well
+
+### Create screen to delete an existing plan
+
+- Responsible: [Responsible name]
+- Story Points: [ 1,  2,  3,  5,  8,  13]
+- Description: The user should be able to select a plan for deletion.
+- Business Rules: The user must be authenticated on the platform
 
 ### Other feature
 

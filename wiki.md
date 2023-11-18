@@ -4,7 +4,7 @@
 
 - Arthur Henrique - 211026673
 - Artur Padoves - (Matrícula)
-- Luiz Henrique - (Matrícula)
+- Luiz Henrique - 211068403
 - Gustavo de Paula - (Matrícula)
 - Thiago Carrijo - (Matrícula)
 - Victor André - 211026664
@@ -34,6 +34,13 @@ be executed first, if selected, the previous steps must be added as well
 - Responsible: [Responsible name]
 - Story Points: [ 1,  2,  3,  5,  8,  13]
 - Description: The user should be able to select a plan for deletion.
+- Business Rules: The user must be authenticated on the platform
+
+### Create method to update an existing plan
+
+- Responsible: [Responsible name]
+- Story Points: [ 1,  2,  3,  5,  8,  13]
+- Description: The user should be able to select a plan for update.
 - Business Rules: The user must be authenticated on the platform
 
 ### Other feature

@@ -6,7 +6,7 @@
 - Artur Padoves - (Matrícula)
 - Luiz Henrique - (Matrícula)
 - Gustavo de Paula - (Matrícula)
-- Thiago Carrijo - (Matrícula)
+- Thiago Carrijo - 211068350
 - Victor André - 211026664
 
 ## Project Scope
@@ -23,23 +23,32 @@ Create interface for a user to create local activity plans
 ### Create screen to create the activity plan
 
 - Responsible: [Responsible name]
-- Story Points: [ 1,  2,  3,  5,  8,  13]
+- Story Points: [ 1, 2, 3, 5, 8, 13]
 - Description: The user should see a list of steps to be performed
-and a list of steps selected for the plan.
+  and a list of steps selected for the plan.
 - Business Rules: The user must select only the predefined steps, some steps may require others to
-be executed first, if selected, the previous steps must be added as well
+  be executed first, if selected, the previous steps must be added as well
 
 ### Create screen to delete an existing plan
 
 - Responsible: [Responsible name]
-- Story Points: [ 1,  2,  3,  5,  8,  13]
+- Story Points: [ 1, 2, 3, 5, 8, 13]
 - Description: The user should be able to select a plan for deletion.
 - Business Rules: The user must be authenticated on the platform
+
+### Schedule local plan's execution
+
+- Responsible: [Responsible name]
+- Story Points: [ 1, 2, 3, 5, 8, 13]
+- Description: The user should be able to select a time to execute the
+  local plan in that specific time
+- Business Rules: The user must be authenticated on the platform and
+  select a time from the present or the future
 
 ### Other feature
 
 - Responsible: [Responsible name]
-- Story Points: [ 1,  2,  3,  5,  8,  13]
+- Story Points: [ 1, 2, 3, 5, 8, 13]
 - Description: [Feature description]
 - Business Rules: [Business rules]
 

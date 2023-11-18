@@ -10,9 +10,25 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../components/AlertDialog";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getLocalPlan } from "../api/localPlan/getLocalPlan";
+import { deleteLocalPlan } from "../api/localPlan/deleteLocalPlan";
+
+const id = 0;
 
 const Hello = (props) => {
   let [count, setCount] = useState(0);
+  const { data, error } = useQuery({
+    queryKey: ["local_plan/:id", id],
+    queryFn: getLocalPlan,
+  });
+
+  const deleteLocalPlanMutation = useMutation({
+    mutationFn: deleteLocalPlan,
+    onError(err) {
+      alert(err.message);
+    },
+  });
 
   return (
     <div>
@@ -24,10 +40,8 @@ const Hello = (props) => {
           setCount(count + 1);
         }}
       >
-        {" "}
-        Add{" "}
+        Next Id
       </button>
-
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <button className="bg-red-500 px-3 py-2 rounded text-zinc-100 m-2 font-semibold">
@@ -46,7 +60,7 @@ const Hello = (props) => {
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => {
-                alert("deletando suas parada");
+                deleteLocalPlanMutation.mutate(0);
               }}
             >
               Continue
@@ -54,6 +68,10 @@ const Hello = (props) => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+      <br />
+      data: {JSON.stringify(data)}
+      <br />
+      error: {error?.message}
     </div>
   );
 };

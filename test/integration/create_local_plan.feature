@@ -46,3 +46,27 @@ Feature: Delete an existing local plan
     Given I have a method that receives a list of existing plans
     When a non-authenticated user tries to delete an existing execution plan
     Then the method should return a sad result
+
+Feature: Schedule local plan's execution
+
+  As a user, I want to be able to schedule the execution of an existing local plan 
+
+  Scenario: Test scheduling the execution of a local plan in the past
+    Given I have a method that schedules the execution of an existing local plan
+    When the user informs the time and it is from the past
+    Then the method should return a sad result
+
+  Scenario: Test scheduling the execution of a local plan in the future or in the present
+    Given I have a method that schedules the execution of an existing local plan
+    When the user informs the time and it is not from the past
+    Then the method should return a happy result
+
+  Scenario: Test scheduling the execution of a local plan as a non-authenticated user
+    Given I have a method that schedules the execution of an existing local plan
+    When a non-authenticated user tries to schedule the execution of a local plan
+    Then the method should return a sad result
+
+  Scenario: Test scheduling the execution of a local plan as an authenticated user
+    Given I have a method that schedules the execution of an existing local plan
+    When an authenticated user tries to schedule the execution of a local plan
+    Then the method should return a happy result

@@ -1,24 +1,33 @@
-import React, {useEffect, useState} from 'react'
-                                                        
-const Hello = (props) => {                                   
-  let [count, setCount] = useState(0)
-  let [req, setReq] = useState("") 
+import React, { useEffect, useState } from "react";
+
+const Hello = (props) => {
+  let [count, setCount] = useState(0);
+  let [req, setReq] = useState("");
   useEffect(() => {
-    fetch("/hello/worldGet").then(async res=>{
-      const parse = await res.text()
-      console.log(parse)
-      return parse
-    }).then(res=>setReq(res))
-  }, [])
+    fetch("/hello/worldGet")
+      .then(async (res) => {
+        const parse = await res.text();
+        console.log(parse);
+        return parse;
+      })
+      .then((res) => setReq(res));
+  }, []);
   return (
     <div>
-      <h1>Counter prop:{props.name}: {count}</h1>
+      <h1 className="text-2xl text-indigo-300">
+        Counter prop:{props.name}: {count}
+      </h1>
       <h2>{req}</h2>
-      <button onClick={()=>{
-        setCount(count+1)
-      }}> Add </button>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        {" "}
+        Add{" "}
+      </button>
     </div>
-  )                   
-}                                                       
-                                        
-export default Hello
+  );
+};
+
+export default Hello;

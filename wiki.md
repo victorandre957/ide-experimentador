@@ -5,7 +5,7 @@
 - Arthur Henrique - 211026673
 - Artur Padoves - (Matrícula)
 - Luiz Henrique - (Matrícula)
-- Gustavo de Paula - (Matrícula)
+- Gustavo de Paula - 212006871
 - Thiago Carrijo - (Matrícula)
 - Victor André - 211026664
 
@@ -35,6 +35,21 @@ be executed first, if selected, the previous steps must be added as well
 - Story Points: [ 1,  2,  3,  5,  8,  13]
 - Description: The user should be able to select a plan for deletion.
 - Business Rules: The user must be authenticated on the platform
+
+### Activate an existing, inactive, plan
+
+- Responsible: [Responsible name]
+- Story Points: [ 1,  2,  3,  5,  8,  13]
+- Description: The user should be able to view and select an inactive plan, to activate it.
+- Business Rules: The user, once authenticated, must select an existing inactive plan, and opt to activate it.
+
+### Deactivate an existing, active, plan
+
+- Responsible: [Responsible name]
+- Story Points: [ 1,  2,  3,  5,  8,  13]
+- Description: The user should be able to view and select an active plan, to deactivate it.
+- Business Rules: The user, once authenticated, must select an existing active plan, and opt to deactivate it.
+
 
 ### Other feature
 

@@ -46,3 +46,31 @@ Feature: Delete an existing local plan
     Given I have a method that receives a list of existing plans
     When a non-authenticated user tries to delete an existing execution plan
     Then the method should return a sad result
+
+Feature: Activate a local plan not currently executed
+
+  As an user, I want to activate an already existing plan
+
+  Scenario: Test activating a plan, not currently executed
+    Given I have a method that activates a plan
+    When the user selects a plan and it does exist, and is not being currently executed
+    Then the method should return a happy result
+
+  Scenario: Test activating a plan, currently executed
+    Given I have a method that activates a plan
+    When the user selects a plan and it does exist, and is being currently executed
+    Then the method should return a sad result
+
+Feature: Deactivate a local plan currently executed
+
+  As an user, I want to deactivate a local plan, being executed
+
+  Scenario: Test deactivating a valid plan, not currently executed
+    Given I have a method that deactivates a plan
+    When the user selects a plan and it does exist, and is not being currently executed
+    Then the method should return a sad result
+
+  Scenario: Test deactivating a valid plan, currently executed
+    Given I have a method that deactivates a plan
+    When the user selects a plan and it does exist, and is being currently executed
+    Then the method should return a happy result

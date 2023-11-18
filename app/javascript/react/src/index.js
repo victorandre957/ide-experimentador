@@ -1,4 +1,4 @@
-import { define } from 'remount'      
-import Hello from "./components/Hello"
-                                      
-define({ 'hello-component': Hello })
+import { define } from "remount";
+import Hello from "./pages/Hello";
+
+define({ "hello-component": Hello });

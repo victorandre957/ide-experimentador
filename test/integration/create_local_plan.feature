@@ -74,18 +74,30 @@ Feature: Update an existing local plan
     Then the method should return a sad result
     
   # divisão:
-    Given I have a method that update a specific existing parameter
-    When the user informs that to be updated parameter and it does exist
-    Then the method should return a happy result
+    Scenario: Updating a existing valid plan whit valid parameter
+    Given that I am logged in
+    And there's an experiment with a robot
+    And I'm on the "editing robot"
+    When I click “Update a local plan”
+    And updata a parameter
+    And click "Update"
+    Then I should be redirected to the "edit robot" page
+    And there should be the text "Edit local plan"
     
-    Given I have a method that update a specific existing parameter
-    When the user informs that to be updated parameter and it does not exist
-    Then the method should return a sad result
+Scenario: Updating a existing valid plan whit invalid parameter
+    Given that I am logged in
+    And there's an experiment with a robot
+    And I'm on the "editing robot"
+    When I click “Update a local plan”
+    And update a parameter
+    And click "Update"
+    And the parameters are invalid
     
-    Given I have a method that update a specific existing parameter
-    When the user informs a parameter to be updated that exists for another that does not exist
-    Then the method should return a sad result
-    
-    Given I have a method that update a specific existing parameter
-    When the user informs that to be updated parameter without selecting the skill
-    Then the method should return a sad result
+Scenario: Updating a existing valid plan whit valid parameter for another that invalid
+    Given that I am logged in
+    And there's an experiment with a robot
+    And I'm on the "editing robot"
+    When I click “Update a local plan”
+    And update a parameter 
+    And click "Update"
+    And the new parameters are invalid

@@ -28,7 +28,7 @@ Create interface for a user to create local activity plans
 - Business Rules:
     1. The user must be authenticated on the platform.
     2. Step may only use skills the robot has. Otherwise alert the user.
-    3. Skills offered are the ones the [experimenter](https://github.com/VicenteMoraes/robotics_sim) recognizes
+    3. Skills offered are the ones the [experimenter](https://github.com/VicenteMoraes/robotics_sim) recognizes. It seems they are [here](https://github.com/VicenteMoraes/skill_library)
 
 ### Create screen to delete an existing plan
 

@@ -44,7 +44,7 @@ Feature: Delete an existing local plan
     Given I have a method that deletes a specific existing execution plan
     When the user informs the to-be deleted plan and it does not exist
     Then the method should return a sad result
-
+  # divisão
   Scenario: Test deleting a plan as an authenticated user
     Given I have a method that receives a list of existing plans
     When an authenticated user tries to delete an existing execution plan
@@ -73,6 +73,7 @@ Feature: Update an existing local plan
     When the user informs a skill to be updated that exists for another that does not exist
     Then the method should return a sad result
     
+  # divisão:
     Given I have a method that update a specific existing parameter
     When the user informs that to be updated parameter and it does exist
     Then the method should return a happy result

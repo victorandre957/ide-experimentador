@@ -3,10 +3,10 @@
 ## Group members
 
 - Arthur Henrique - 211026673
-- Artur Padoves - (Matrícula)
+- Artur Padovesi - 211038208
 - Luiz Henrique - 211068403
-- Gustavo de Paula - (Matrícula)
-- Thiago Carrijo - (Matrícula)
+- Gustavo de Paula - 212006871
+- Thiago Carrijo - 211068350
 - Victor André - 211026664
 
 ## Project Scope
@@ -22,38 +22,33 @@ Create interface for a user to create local activity plans
 
 ### Create screen to create the activity plan
 
-- Responsible: [Responsible name]
-- Story Points: [ 1,  2,  3,  5,  8,  13]
-- Description: The user should see a list of steps to be performed
-and a list of steps selected for the plan.
-- Business Rules: The user must select only the predefined steps, some steps may require others to
-be executed first, if selected, the previous steps must be added as well
+- Responsible: Artur Padovesi and Arthur Henrique
+- Story Points: 5
+- Description: The user should be able to create a list of steps to be performed.
+- Business Rules:
+    1. The user must be authenticated on the platform.
+    2. Step may only use skills the robot has. Otherwise alert the user.
+    3. Skills offered are the ones the [experimenter](https://github.com/VicenteMoraes/robotics_sim) recognizes
 
 ### Create screen to delete an existing plan
 
-- Responsible: [Responsible name]
-- Story Points: [ 1,  2,  3,  5,  8,  13]
+- Responsible: Luiz Henrique and Gustavo de Paula
+- Story Points: 1
 - Description: The user should be able to select a plan for deletion.
 - Business Rules: The user must be authenticated on the platform
 
 ### Create screen to update an existing plan
 
-- Responsible: [Responsible name]
-- Story Points: [ 1,  2,  3,  5,  8,  13]
+- Responsible: Thiago Carrijo and Victor André
+- Story Points: 1
 - Description: The user should be able to select a plan for update.
 - Business Rules: The user must be authenticated on the platform
-
-### Other feature
-
-- Responsible: [Responsible name]
-- Story Points: [ 1,  2,  3,  5,  8,  13]
-- Description: [Feature description]
-- Business Rules: [Business rules]
 
 ## Branch Policy
 
 - sprint-x: This Branch must have the code ready and revised for the sprint delivery
 - feature: Created for the development of a new functionality
+- refactor: Created to improve specific operation without altering functionality
 - bug: Created to correct errors and failures
 - docs: Created for documentation
 

@@ -54,3 +54,37 @@ Feature: Delete an existing local plan
     Given I have a method that receives a list of existing plans
     When a non-authenticated user tries to delete an existing execution plan
     Then the method should return a sad result
+
+
+Feature: Update an existing local plan
+
+  As a user, I want to be able to update an existing execution plan
+
+  Scenario: Test updating an existing execution plan
+    Given I have a method that update a specific existing skill
+    When the user informs the to be updated skil and it does exist
+    Then the method should return a happy result
+    
+    Given I have a method that update a specific existing skill
+    When the user informs the to be updated skil and it does not exist
+    Then the method should return a sad result
+    
+    Given I have a method that update a specific existing skill
+    When the user informs a skill to be updated that exists for another that does not exist
+    Then the method should return a sad result
+    
+    Given I have a method that update a specific existing parameter
+    When the user informs that to be updated parameter and it does exist
+    Then the method should return a happy result
+    
+    Given I have a method that update a specific existing parameter
+    When the user informs that to be updated parameter and it does not exist
+    Then the method should return a sad result
+    
+    Given I have a method that update a specific existing parameter
+    When the user informs a parameter to be updated that exists for another that does not exist
+    Then the method should return a sad result
+    
+    Given I have a method that update a specific existing parameter
+    When the user informs that to be updated parameter without selecting the skill
+    Then the method should return a sad result

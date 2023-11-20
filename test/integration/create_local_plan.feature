@@ -19,7 +19,7 @@ Feature: Create a new local plan
     When I click “Create a local plan”
     And don't fill in all the information
     And click "Confirm"
-    Then an error message should be displayed due to missing informationt
+    Then an error message should be displayed due to missing information
 
   Scenario: Test creating a new invalid plan
     Given that I am logged in
@@ -55,6 +55,21 @@ Feature: Delete an existing local plan
     When a non-authenticated user tries to delete an existing execution plan
     Then the method should return a sad result
 
+  Scenario: Test accessing a deleted plan
+    Given that I am logged in
+    And I have successfully deleted an existing local plan
+    And I'm on the "delete local plan" screen
+    Then the deleted local plan should not appear on screen
+
+  Scenario: Test cancelling the deletion process before deleting
+    Given that I am logged in
+    And there's an experiment with a robot with a local plan
+    And I'm on the "delete local plan" screen
+    When I change the plan
+    Or I select a "Cancel" option
+    And click on "Confirm"
+    Then the local plan should not be deleted
+
 
 Feature: Update an existing local plan
 
@@ -85,12 +100,12 @@ Feature: Update an existing local plan
     Then the local plan should not be changed
 
   # divisão:
-    Scenario: Updating a existing valid plan whit valid parameter
+    Scenario: Updating a existing valid plan with valid parameter
     Given that I am logged in
     And there's an experiment with a robot
     And I'm on the "editing robot"
     When I click “Update a local plan”
-    And updata a parameter
+    And update a parameter
     And click "Update"
     Then I should be redirected to the "edit robot" page
     And there should be the text "Edit local plan"

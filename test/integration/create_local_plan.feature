@@ -58,21 +58,32 @@ Feature: Delete an existing local plan
 
 Feature: Update an existing local plan
 
-  As a user, I want to be able to update an existing execution plan
+  As a user, I want to be able to update an existing local plan
 
-  Scenario: Test updating an existing execution plan
-    Given I have a method that update a specific existing skill
-    When the user informs the to be updated skil and it does exist
-    Then the method should return a happy result
-    
-    Given I have a method that update a specific existing skill
-    When the user informs the to be updated skil and it does not exist
-    Then the method should return a sad result
-    
-    Given I have a method that update a specific existing skill
-    When the user informs a skill to be updated that exists for another that does not exist
-    Then the method should return a sad result
-    
+  Scenario: I should be able to change an existing step parameters
+    Given that I am logged in
+    And there's an experiment with a robot with a local plan
+    And I'm on the "editing local plan"
+    When I change a step parameters
+    And click on "Confirm"
+    Then the local plan should have updated parameters for the step
+
+  Scenario: I should be able to change an existing step skill
+    Given that I am logged in
+    And there's an experiment with a robot with a local plan
+    And I'm on the "editing local plan"
+    When I change a step skill and parameters
+    And click on "Confirm"
+    Then the local plan should have updated skill and parameters for the step
+
+  Scenario: The update may be cancelled without updating the plan
+    Given that I am logged in
+    And there's an experiment with a robot with a local plan
+    And I'm on the "editing local plan"
+    When I change the plan
+    And click on "Cancel"
+    Then the local plan should not be changed
+
   # divisão:
     Scenario: Updating a existing valid plan whit valid parameter
     Given that I am logged in

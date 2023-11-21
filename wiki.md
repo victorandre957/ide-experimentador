@@ -15,8 +15,8 @@ Create interface for a user to create local activity plans
 
 ## Scrum Master and Product Owner
 
-- **Scrum Master:** [Scrum Master name]
-- **Product Owner:** [Product Owner name]
+- **Scrum Master:** Victor André
+- **Product Owner:** Artur Padovesi
 
 ## Features and Business Rules
 

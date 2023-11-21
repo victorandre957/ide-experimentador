@@ -54,25 +54,30 @@ Feature: Delete an existing local plan
 
   As a user, I want to be able to delete an existing execution plan
 
-  Scenario: Test deleting an existing execution plan
-    Given I have a method that deletes a specific existing execution plan
-    When the user informs the to-be deleted plan and it does exist
-    Then the method should return a happy result
+  Scenario: Test deleting an existing execution plan and verifying successful deletion
+    Given there is a method capable of deleting an existing execution plan
+    And an execution plan exists in the system
+    When the user informs the to-be deleted plan
+    And the specified plan exists
+    Then the method should successfully delete the plan
 
   Scenario: Test deleting a non-existing execution plan
-    Given I have a method that deletes a specific existing execution plan
-    When the user informs the to-be deleted plan and it does not exist
-    Then the method should return a sad result
-  # divisão
+    Given there is a method capable of deleting a specific execution plan
+    And the user attempts to delete a plan that does not exist
+    When the non-existing plan is specified for deletion
+    Then the method should return an unsuccessful result
+
   Scenario: Test deleting a plan as an authenticated user
-    Given I have a method that receives a list of existing plans
+    Given there is a method that retrieves a list of existing plans
+    And the user is authenticated
     When an authenticated user tries to delete an existing execution plan
-    Then the method should return a happy result
+    Then the method should successfully delete the plan
 
   Scenario: Test deleting a plan as a non-authenticated user
-    Given I have a method that receives a list of existing plans
+    Given there is a method that retrieves a list of existing plans
+    And the user is not authenticated
     When a non-authenticated user tries to delete an existing execution plan
-    Then the method should return a sad result
+    Then the method should return an unauthorized
 
   Scenario: Test accessing a deleted plan
     Given that I am logged in
@@ -118,8 +123,7 @@ Feature: Update an existing local plan
     And click on "Cancel"
     Then the local plan should not be changed
 
-  # divisão:
-    Scenario: Updating a existing valid plan with valid parameter
+  Scenario: Updating a existing valid plan with valid parameter
     Given that I am logged in
     And there's an experiment with a robot
     And I'm on the "editing robot"
@@ -129,7 +133,7 @@ Feature: Update an existing local plan
     Then I should be redirected to the "edit robot" page
     And there should be the text "Edit local plan"
     
-Scenario: Updating a existing valid plan whit invalid parameter
+  Scenario: Updating a existing valid plan whit invalid parameter
     Given that I am logged in
     And there's an experiment with a robot
     And I'm on the "editing robot"
@@ -138,7 +142,7 @@ Scenario: Updating a existing valid plan whit invalid parameter
     And click "Update"
     And the parameters are invalid
     
-Scenario: Updating a existing valid plan whit valid parameter for another that invalid
+  Scenario: Updating a existing valid plan whit valid parameter for another that invalid
     Given that I am logged in
     And there's an experiment with a robot
     And I'm on the "editing robot"

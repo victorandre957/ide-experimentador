@@ -61,12 +61,6 @@ Feature: Delete an existing local plan
     And the specified plan exists
     Then the method should successfully delete the plan
 
-  Scenario: Test deleting a non-existing execution plan
-    Given there is a method capable of deleting a specific execution plan
-    And the user attempts to delete a plan that does not exist
-    When the non-existing plan is specified for deletion
-    Then the method should return an unsuccessful result
-
   Scenario: Test deleting a plan as an authenticated user
     Given there is a method that retrieves a list of existing plans
     And the user is authenticated

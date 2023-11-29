@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stepNumber: 1
+  label: MyString
+  parameters: 
+  robot: one
+
+two:
+  stepNumber: 1
+  label: MyString
+  parameters: 
+  robot: two

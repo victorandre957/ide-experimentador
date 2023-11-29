@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_13_225719) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_29_142716) do
   create_table "classifications", force: :cascade do |t|
     t.integer "trial_id"
     t.integer "tag_id"
@@ -30,6 +30,21 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_225719) do
   create_table "factors", force: :cascade do |t|
     t.string "name"
     t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "local_plan_steps", force: :cascade do |t|
+    t.integer "stepNumber"
+    t.string "label"
+    t.json "parameters"
+    t.integer "robot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["robot_id"], name: "index_local_plan_steps_on_robot_id"
+  end
+
+  create_table "robots", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,4 +91,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_225719) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "local_plan_steps", "robots"
 end

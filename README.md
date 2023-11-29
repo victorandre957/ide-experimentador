@@ -41,7 +41,7 @@ rails db:create
 rails db:migrate
 ```
 
-### Como rodar
+### Rodando para desenvolvimento
 
 Tente rodar direto o projeto:
 
@@ -53,4 +53,13 @@ Caso necessário gerar um secret
 
 ```bash
 ./bin/rails secret
+```
+
+### Rodando os testes
+
+#### Cucumber
+
+```bash
+cucumber features/path/to/file.feature
+
 ```

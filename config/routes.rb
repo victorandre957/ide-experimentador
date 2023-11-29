@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  namespace :api do
+    get 'local_plan_steps/index_by_robot'
+    get 'local_plan_steps/create'
+    get 'local_plan_steps/update'
+    get 'local_plan_steps/delete'
+  end
+
+  get 'local_plan_steps/:robot_id', to: "local_plan_steps#index"
+
   get 'hello/world'
   get 'hello/worldGet', to: "hello#index" 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -27,6 +27,18 @@ Things you may want to cover:
 
 ### Setup
 
+#### Bun
+
+[Instale o Bun](https://bun.sh/docs/installation)
+
+Então rode:
+
+```bash
+bun install
+```
+
+#### Ruby
+
 Usa a **versão do ruby correta** (olha a Gemfile, atualmente é a 2.7.5).
 
 ```bash

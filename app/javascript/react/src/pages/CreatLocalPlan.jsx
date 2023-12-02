@@ -2,27 +2,40 @@ import React, { useState } from "react";
 import Inputs from "../components/Inputs";
 import styled from "styled-components";
 
-const App = () => {
-  const [steps, setSteps] = useState([{ skill: "", parameters: "", goal: "" }]);
+let steps = [
+  {
+    skill: "",
+    label: "",
+    parameters: {},
+  },
+];
 
-  const handleChange = (index, name, value) => {
+const App = () => {
+  const handleChange = (index, value) => {
     const newSteps = [...steps];
-    newSteps[index][name] = value;
-    setSteps(newSteps);
+    newSteps[index] = value;
+    steps = [...newSteps];
   };
 
   const handleAddStep = () => {
-    setSteps([...steps, { skill: "", parameters: "", goal: "" }]);
+    steps = [...steps, { skill: "", label: "", parameters: {} }];
+    forceUpdate(); 
   };
 
   const handleRemoveStep = (index) => {
     const newSteps = steps.filter((_, i) => i !== index);
-    setSteps(newSteps);
+    steps = [...newSteps];
+    forceUpdate(); 
   };
 
-  const handleDeletePlan = (index) => {
-    setSteps([]);
+  const handleDeletePlan = () => {
+    steps = [];
+    forceUpdate(); 
   };
+
+  // Função para forçar a atualização do componente
+  const [, updateState] = useState();
+  const forceUpdate = () => updateState({});
 
   const TitleDiv = styled.div`
     display: flex;
@@ -42,8 +55,15 @@ const App = () => {
         <button onClick={handleDeletePlan}>Deletar Plano Local</button>
       </TitleDiv>
       {steps.map((step, index) => (
-        <Inputs onRemove={handleRemoveStep} />
+        <Inputs
+          key={index} // Adicione a chave única para cada Input
+          step={step}
+          stepIndex={index}
+          onChange={handleChange}
+          onRemove={handleRemoveStep}
+        />
       ))}
+      <button onClick={() => {console.log(steps)}}>Save</button>
       <button onClick={handleAddStep}>Adicionar Passo</button>
     </ContentDiv>
   );

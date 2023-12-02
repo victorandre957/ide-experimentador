@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const LocalPlanForm = () => {
+const LocalPlanForm = ({ step, stepIndex, onRemove, onChange }) => {
   const [selectedSkill, setSelectedSkill] = useState("");
   const [formParams, setFormParams] = useState({
     skill: "",
@@ -8,20 +8,39 @@ const LocalPlanForm = () => {
     parameters: {},
   });
 
+  useEffect(() => {
+    setFormParams(step);
+    setSelectedSkill(step.skill);
+  }, [step]);
+
   const handleSkillChange = (e) => {
-    const skill = e.target.value;
-    setSelectedSkill(skill);
-    setFormParams({ skill, parameters: {} });
+    const _skill = e.target.value;
+    const updatedParams = { ...formParams, skill: _skill, parameters: {} };
+    if(_skill === "navigation") {
+      updatedParams.parameters = { room: "", waypoints: [] };
+    }
+    onChange(stepIndex, updatedParams);
+    setSelectedSkill(_skill);
+    setFormParams(updatedParams);
   };
 
   const handleLabelChange = (e) => {
+    const { value } = e.target;
+    onChange(stepIndex, { ...formParams, label: value });
     setFormParams((prevParams) => ({
       ...prevParams,
-      label: e.target.value,
+      label: value,
     }));
   };
 
   const handleInputChange = (name, value) => {
+    onChange(stepIndex, {
+      ...formParams,
+      parameters: {
+        ...formParams.parameters,
+        [name]: value,
+      },
+    });
     setFormParams((prevParams) => ({
       ...prevParams,
       parameters: {
@@ -32,6 +51,15 @@ const LocalPlanForm = () => {
   };
 
   const handleWaypointChange = (index, coord, value) => {
+    onChange(stepIndex, {
+      ...formParams,
+      parameters: {
+        ...formParams.parameters,
+        waypoints: formParams.parameters.waypoints.map((waypoint, i) =>
+          i === index ? { ...waypoint, [coord]: value } : waypoint
+        ),
+      },
+    });
     setFormParams((prevParams) => ({
       ...prevParams,
       parameters: {
@@ -44,6 +72,16 @@ const LocalPlanForm = () => {
   };
 
   const handleAddWaypoint = () => {
+    onChange(stepIndex, {
+      ...formParams,
+      parameters: {
+        ...formParams.parameters,
+        waypoints: [
+          ...(formParams.parameters.waypoints || []),
+          { x: "", y: "", z: "" },
+        ],
+      },
+    });
     setFormParams((prevParams) => ({
       ...prevParams,
       parameters: {
@@ -57,6 +95,13 @@ const LocalPlanForm = () => {
   };
 
   const handleRemoveWaypoint = () => {
+    onChange(stepIndex, {
+      ...formParams,
+      parameters: {
+        ...formParams.parameters,
+        waypoints: formParams.parameters.waypoints.slice(0, -1),
+      },
+    });
     setFormParams((prevParams) => {
       const waypoints = prevParams.parameters.waypoints || [];
       waypoints.pop(); // Remove the last waypoint
@@ -68,7 +113,7 @@ const LocalPlanForm = () => {
   };
 
   const handleRemove = () => {
-    onRemove(1);
+    onRemove(stepIndex);
   };
 
   const renderFormInputs = () => {
@@ -79,10 +124,15 @@ const LocalPlanForm = () => {
           id="labelInput"
           type="text"
           placeholder="Label"
+          value={formParams.label || ""}
           onChange={handleLabelChange}
         />
         <label htmlFor="skillSelect">Select Skill:</label>
-        <select id="skillSelect" onChange={handleSkillChange}>
+        <select
+          id="skillSelect"
+          onChange={handleSkillChange}
+          value={formParams.skill || ""}
+        >
           <option value="">Select a skill</option>
           <option value="navigation">Navigation</option>
           <option value="operate_drawer">Operate Drawer</option>
@@ -106,6 +156,7 @@ const LocalPlanForm = () => {
             type="text"
             placeholder="Room"
             onChange={(e) => handleInputChange("room", e.target.value)}
+            value={formParams.parameters.room || ""}
           />
           <button onClick={handleAddWaypoint}>Add Waypoint</button>
           <button onClick={handleRemoveWaypoint}>Remove Last Waypoint</button>
@@ -121,6 +172,7 @@ const LocalPlanForm = () => {
       return (
         <input
           type="text"
+          value={formParams.parameters[key] || ""}
           placeholder={selectedSkill === "operate_drawer" ? "Action" : "Topic"}
           onChange={(e) => handleInputChange(key, e.target.value)}
         />
@@ -136,16 +188,19 @@ const LocalPlanForm = () => {
         <div key={index}>
           <input
             type="number"
+            value={waypoint.x || ""}
             placeholder="x"
             onChange={(e) => handleWaypointChange(index, "x", e.target.value)}
           />
           <input
             type="number"
+            value={waypoint.y || ""}
             placeholder="y"
             onChange={(e) => handleWaypointChange(index, "y", e.target.value)}
           />
           <input
             type="number"
+            value={waypoint.z || ""}
             placeholder="z"
             onChange={(e) => handleWaypointChange(index, "z", e.target.value)}
           />

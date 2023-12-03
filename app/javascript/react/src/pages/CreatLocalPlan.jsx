@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Inputs from "../components/Inputs";
+import LocalPlanForm from "../components/LocalPlanForm";
 import styled from "styled-components";
 
 let steps = [
@@ -10,7 +10,7 @@ let steps = [
   },
 ];
 
-const App = () => {
+const CreatLocalPlan = () => {
   const handleChange = (index, value) => {
     const newSteps = [...steps];
     newSteps[index] = value;
@@ -55,7 +55,7 @@ const App = () => {
         <button onClick={handleDeletePlan}>Deletar Plano Local</button>
       </TitleDiv>
       {steps.map((step, index) => (
-        <Inputs
+        <LocalPlanForm
           key={index} // Adicione a chave única para cada Input
           step={step}
           stepIndex={index}
@@ -69,4 +69,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default CreatLocalPlan;

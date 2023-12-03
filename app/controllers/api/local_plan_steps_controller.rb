@@ -41,11 +41,11 @@ class Api::LocalPlanStepsController < ApplicationController
     when 'navigation'
       parameter_content = [:room, waypoints: [:x, :y, :z]]
     when 'approach_person', 'authenticate_person', 'send_message', 'wait_message', 'approach_robot'
-      parameter_content = [topic: []]
+      parameter_content = [:topic]
     when 'operate_drawer'
-      parameter_content = [action: []]
+      parameter_content = [:action]
     else
-      # dont permit skill:
+      # dont permit skill if not specified:
       return par.permit(:label, :stepNumber, :robot_id)
     end
 
@@ -60,9 +60,9 @@ class Api::LocalPlanStepsController < ApplicationController
     when 'navigation'
       parameter_content = [:room, waypoints: [:x, :y, :z]]
     when 'approach_person', 'authenticate_person', 'send_message', 'wait_message', 'approach_robot'
-      parameter_content = [topic: []]
+      parameter_content = [:topic]
     when 'operate_drawer'
-      parameter_content = [action: []]
+      parameter_content = [:action]
     else
       # dont permit skill:
       return par.permit(:label, :robot_id)

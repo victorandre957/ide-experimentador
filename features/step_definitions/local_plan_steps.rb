@@ -26,7 +26,6 @@ When /^click "Cancel"$/ do
   fill_in 'x', with: 1.3
   fill_in 'y', with: 2.2
   fill_in 'z', with: 3.1
-  click_button 'Save'
   click_button 'Deletar Plano Locals'
   LocalPlanStep.count(robot_id: 999).to eq(0)
 end

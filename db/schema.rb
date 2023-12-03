@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_03_134218) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_03_140244) do
   create_table "classifications", force: :cascade do |t|
     t.integer "trial_id"
     t.integer "tag_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_134218) do
   create_table "local_plan_steps", force: :cascade do |t|
     t.integer "stepNumber"
     t.string "label"
-    t.json "parameters"
+    t.json "parameter"
     t.integer "robot_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

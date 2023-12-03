@@ -63,7 +63,7 @@ const App = () => {
           onRemove={handleRemoveStep}
         />
       ))}
-      <button onClick={() => {console.log(steps)}}>Save</button>
+      <button onClick={() => {console.log(steps)}}>Salvar</button>
       <button onClick={handleAddStep}>Adicionar Passo</button>
     </ContentDiv>
   );

@@ -36,8 +36,12 @@
 #     },
 #     "label":"navto_room"
 # },
-LocalPlanStep.create(
+r = Robot.create!(id: 999)
+
+LocalPlanStep.create!(
+    robot_id: r.id,
     label: "navto_room",
     skill: "navigation",
-    parameter: { room: "PC Room 3", waypoints: [ {x: 0.1, y: 0.6, z: -1.2 } ] }
+    parameter: { room: "PC Room 3", waypoints: [ {x: 0.1, y: 0.6, z: -1.2 } ] },
+    stepNumber: 1
 )

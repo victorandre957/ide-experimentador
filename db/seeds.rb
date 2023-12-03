@@ -7,3 +7,41 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+
+# {
+#     "skill": "navigation",
+#     "parameter":{
+#         "room":"PC Room 3",
+#         "waypoints": [
+#             {
+#                 "x":-27.23,
+#                 "y":18.0,
+#                 "z":-1.57
+#             },
+#             {
+#                 "x":-27.23,
+#                 "y":16.0
+#             },
+#             {
+#                 "x":-28.5,
+#                 "y":16.0
+#             },
+#             {
+#                 "x":-28.5,
+#                 "y":18.0,
+#                 "z":-1.57
+#             }
+#         ]
+#     },
+#     "label":"navto_room"
+# },
+r = Robot.create!(id: 999)
+
+LocalPlanStep.create!(
+    robot_id: r.id,
+    label: "navto_room",
+    skill: "navigation",
+    parameter: { room: "PC Room 3", waypoints: [ {x: 0.1, y: 0.6, z: -1.2 } ] },
+    stepNumber: 1
+)

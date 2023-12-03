@@ -1,4 +1,4 @@
-Given /^that I am logged in$/
+Given /^that I am logged in$/ do
   # To-Do
 end
 
@@ -6,8 +6,8 @@ And /^there is a robot with id = "([^"]*)"$/ do |robot_id|
   r = Robot.create!(id: robot_id)
 end
 
-And /^I'm creating a local plan for the robot "([^"]*)"$/ do |page|
-  visit '/local_plan_steps/#{page}'
+And /^I am creating a local plan for the robot "([^"]*)"$/ do |page|
+  visit "local_plan_steps/#{page}"
 end
 
 And /^fill in all the information$/ do
@@ -19,7 +19,7 @@ And /^fill in all the information$/ do
   fill_in 'y', with: 2.2
   fill_in 'z', with: 3.1
 end
-  
+
 And /^click "Confirm"$/ do
   click_button 'Save'
 end

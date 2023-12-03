@@ -5,7 +5,7 @@ Feature: Create a new local plan
   Scenario: Test creating a new valid plan
     Given that I am logged in
     And there is a robot with id = "999"
-    And Im creating a local plan for the robot "999"
+    And I am creating a local plan for the robot "999"
     And fill in all the information
     And click "Confirm"
     Then there should be LocalPlanSteps wiith robot_id: "999"

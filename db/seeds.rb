@@ -39,5 +39,5 @@
 LocalPlanStep.create(
     label: "navto_room",
     skill: "navigation",
-    parameters: { room: "PC Room 3", waypoints: [ {x: 0.1, y: 0.6, z: -1.2 } ] }
+    parameter: { room: "PC Room 3", waypoints: [ {x: 0.1, y: 0.6, z: -1.2 } ] }
 )

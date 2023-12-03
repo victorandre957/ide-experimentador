@@ -4,13 +4,11 @@ Feature: Create a new local plan
 
   Scenario: Test creating a new valid plan
     Given that I am logged in
-    And there's an experiment with a robot
-    And I'm on the "editing robot"
-    When I click “Create a local plan”
+    And there is a robot with id = "999"
+    And I'm creating a local plan for the robot "999" 
     And fill in all the information
     And click "Confirm"
-    Then I should be redirected to the "edit robot" page
-    And there should be the text "Edit local plan"
+    Then there should be LocalPlanSteps wiith robot_id: "999"
 
   Scenario: Test creating a new invalid plan
     Given that I am logged in

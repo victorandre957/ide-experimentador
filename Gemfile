@@ -63,8 +63,6 @@ group :development do
 end
 
 group :test do
-  gem 'cucumber-rails'
-  gem 'database_cleaner'
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "cucumber-rails", require: false
   gem "capybara"

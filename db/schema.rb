@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_29_142716) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_03_134218) do
   create_table "classifications", force: :cascade do |t|
     t.integer "trial_id"
     t.integer "tag_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_29_142716) do
     t.integer "robot_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "skill"
     t.index ["robot_id"], name: "index_local_plan_steps_on_robot_id"
   end
 
@@ -59,10 +60,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_29_142716) do
   create_table "trial_executions", force: :cascade do |t|
     t.string "status"
     t.text "log"
-    t.integer "trial_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["trial_id"], name: "index_trial_executions_on_trial_id"
   end
 
   create_table "trial_factors", force: :cascade do |t|

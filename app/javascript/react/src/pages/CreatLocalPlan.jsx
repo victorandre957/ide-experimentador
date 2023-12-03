@@ -6,7 +6,7 @@ let steps = [
   {
     skill: "",
     label: "",
-    parameters: {},
+    parameter: {},
   },
 ];
 
@@ -18,7 +18,7 @@ const App = () => {
   };
 
   const handleAddStep = () => {
-    steps = [...steps, { skill: "", label: "", parameters: {} }];
+    steps = [...steps, { skill: "", label: "", parameter: {} }];
     forceUpdate(); 
   };
 

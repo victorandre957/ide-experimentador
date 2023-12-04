@@ -233,6 +233,7 @@ const LocalPlanForm = ({ step, stepIndex, onRemove, onChange }) => {
   };
 
   const renderFormInputsForSkill = () => {
+    const key = selectedSkill === "operate_drawer" ? "action" : "topic";
     if (selectedSkill === "navigation") {
       return (
         <ParameterDiv>
@@ -267,7 +268,6 @@ const LocalPlanForm = ({ step, stepIndex, onRemove, onChange }) => {
       selectedSkill === "approach_robot" ||
       selectedSkill === "authenticate_person"
     ) {
-      const key = selectedSkill === "operate_drawer" ? "action" : "topic";
       return (
         <ParameterDiv>
           <TitleParameterDiv>

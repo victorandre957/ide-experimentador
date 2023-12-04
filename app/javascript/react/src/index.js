@@ -1,5 +1,5 @@
 import { define } from "remount";
-import Hello from "./pages/CreatLocalPlan";
+import CreateLocalPlan from "./pages/CreateLocalPlan";
 import { wrapWithQueryProvider } from "./wrapWithQueryProvider";
 
-define({ "hello-component": wrapWithQueryProvider(Hello) });
+define({ "create-local-plan-component": wrapWithQueryProvider(CreateLocalPlan) });

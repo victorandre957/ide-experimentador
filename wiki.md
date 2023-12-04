@@ -22,7 +22,7 @@ Create interface for a user to create local activity plans
 
 ### Create screen to create the activity plan
 
-- Responsible: Artur Padovesi and Arthur Henrique
+- Responsible: Victor André and Thiago Carrijo
 - Story Points: 5
 - Description: The user should be able to create a list of steps to be performed.
 - Business Rules:
@@ -32,17 +32,56 @@ Create interface for a user to create local activity plans
 
 ### Create screen to delete an existing plan
 
-- Responsible: Luiz Henrique and Gustavo de Paula
+- Responsible: Victor André and Thiago Carrijo
 - Story Points: 1
 - Description: The user should be able to select a plan for deletion.
 - Business Rules: The user must be authenticated on the platform
 
 ### Create screen to update an existing plan
 
-- Responsible: Thiago Carrijo and Victor André
+- Responsible: Victor André and Thiago Carrijo
 - Story Points: 1
 - Description: The user should be able to select a plan for update.
 - Business Rules: The user must be authenticated on the platform
+
+### Create Controller to create the activity plan
+
+- Responsible: Artur Padovesi and Gustavo de Paula
+- Story Points: 2
+- description: API functions that allow create plans
+- Business Rules: The user must be authenticated on the platform
+
+### Create Controller to delete the activity plan
+
+- Responsible: Artur Padovesi and Gustavo de Paula
+- Story Points: 2
+- description: API functions that allow deleting created plans
+- Business Rules: The user must be authenticated on the platform
+
+### Create Controller to update the activity plan
+
+- Responsible: Artur Padovesi and Gustavo de Paula
+- Story Points: 2
+- description: API functions that allow update created plans
+- Business Rules: The user must be authenticated on the platform
+
+### Create Cucumber tests to create the activity plan
+
+- Responsible: Arthur Henrique and Luiz Henrique
+- Story Points: 2
+- description: creates tests to ensure everything is correct
+
+### Create Cucumber tests to delete the activity plan
+
+- Responsible: Arthur Henrique and Luiz Henrique
+- Story Points: 2
+- description: creates tests to ensure everything is correct
+
+### Create Cucumber tests to update the activity plan
+
+- Responsible: Arthur Henrique and Luiz Henrique
+- Story Points: 2
+- description: creates tests to ensure everything is correct,
 
 ## Branch Policy
 

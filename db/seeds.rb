@@ -36,12 +36,12 @@
 #     },
 #     "label":"navto_room"
 # },
-r = Robot.create!(id: 999)
+r = Robot.create!(id: 22)  #Na seed, é necessário trocar o Id do robô para não falhar na validação do robô
 
 LocalPlanStep.create!(
     robot_id: r.id,
-    label: "navto_room",
+    label: "n_room",
     skill: "navigation",
-    parameter: { room: "PC Room 3", waypoints: [ {x: 0.1, y: 0.6, z: -1.2 } ] },
+    parameter: { room: "PC Room 3", waypoints: [ {x: 0.1, y: 0.6, z: -1.2 },  {x: 0.1, y: 0.6, z: -1.2 }, {x: 0.1, y: 0.6, z: -1.2 }, {x: 0.1, y: 0.6, z: -1.2 }] },
     stepNumber: 1
 )

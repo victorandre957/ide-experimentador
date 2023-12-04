@@ -60,8 +60,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_140244) do
   create_table "trial_executions", force: :cascade do |t|
     t.string "status"
     t.text "log"
+    t.integer "trial_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["trial_id"], name: "index_trial_executions_on_trial_id"
   end
 
   create_table "trial_factors", force: :cascade do |t|

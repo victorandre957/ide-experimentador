@@ -72,6 +72,10 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "database_cleaner"
+  gem "metric_fu-Saikuro"
+  gem "rubycritic"
+  gem "simplecov"
+  gem "rdoc"
 end
 
 gem "tailwindcss-rails", "~> 2.0"

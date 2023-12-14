@@ -26,9 +26,9 @@ Create interface for a user to create local activity plans
 - Story Points: 5
 - Description: The user should be able to create a list of steps to be performed.
 - Business Rules:
-    1. The user must be authenticated on the platform.
-    2. Step may only use skills the robot has. Otherwise alert the user.
-    3. Skills offered are the ones the [experimenter](https://github.com/VicenteMoraes/robotics_sim) recognizes. It seems they are [here](https://github.com/VicenteMoraes/skill_library)
+  1. The user must be authenticated on the platform.
+  2. Step may only use skills the robot has. Otherwise alert the user.
+  3. Skills offered are the ones the [experimenter](https://github.com/VicenteMoraes/robotics_sim) recognizes. It seems they are [here](https://github.com/VicenteMoraes/skill_library)
 
 ### Create screen to delete an existing plan
 
@@ -87,13 +87,27 @@ Create interface for a user to create local activity plans
 
 - Responsible: Victor André
 
-|              File                    |     After Refactor     |    Before Refactor     |
-|--------------------------------------|-------------------------------------------------|
-| local_plan_steps_controller.rb       | 8.6 complexity/method  | 7.4 complexity/method  |
-| local_plan_step.rb                   | 82.0 complexity/method | 6.7 complexity/method  |
-| local_plan_steps.rb                  | N/A complexity/method  | 13.2 complexity/method |
-| local_plan_steps_controller_spec.rb  | N/A complexity/method  | 19.1 complexity/method |
-| local_plan_steps_controller_test.rb  | N/A complexity/method  |  4.9 complexity/method |
+| File                                | After Refactor         | Before Refactor        |
+| ----------------------------------- | ---------------------- | ---------------------- |
+| local_plan_steps_controller.rb      | 8.6 complexity/method  | 7.4 complexity/method  |
+| local_plan_step.rb                  | 82.0 complexity/method | 6.7 complexity/method  |
+| local_plan_steps.rb                 | N/A complexity/method  | 13.2 complexity/method |
+| local_plan_steps_controller_spec.rb | N/A complexity/method  | 19.1 complexity/method |
+| local_plan_steps_controller_test.rb | N/A complexity/method  | 4.9 complexity/method  |
+
+## Cyclomatic Complexity (complexity < 10)
+
+- Responsible: Thiago Carrijo
+
+| File                           | After Refactor | Before Refactor |
+| ------------------------------ | -------------- | --------------- |
+| local_plan_steps_controller.rb | 16 complexity  | 0 complexity    |
+| local_plan_steps_actions.rb    | - complexity   | 5 complexity    |
+| local_plan_steps_index.rb      | - complexity   | 2 complexity    |
+| local_plan_steps_private.rb    | - complexity   | 6 complexity    |
+| local_plan_step.rb             | 10 complexity  | 0 complexity    |
+| local_plan_step_public.rb      | - complexity   | 4 complexity    |
+| local_plan_step_private.rb     | - complexity   | 7 complexity    |
 
 ## Branch Policy
 

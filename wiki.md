@@ -83,6 +83,19 @@ Create interface for a user to create local activity plans
 - Story Points: 2
 - description: creates tests to ensure everything is correct,
 
+
+# Sprint 3
+
+## ABC Score (method complexity < 20)
+
+|              File                    |                  After Refactor                 |                 Before Refactor                 |
+|--------------------------------------|-------------------------------------------------|-------------------------------------------------|
+| local_plan_steps_controller.rb       | 6 churn, 0 duplications, 8.6 complexity/method  | 3 churn, 34 duplications, N/A complexity/method |
+| local_plan_step.rb                   | 6 churn, 0 duplications, 82.0 complexity/method | 3 churn, 34 duplications, N/A complexity/method |
+| local_plan_steps.rb                  | 9 churn, 0 duplications,  N/A complexity/method | 3 churn, 34 duplications, N/A complexity/method |
+| local_plan_steps_controller_spec.rb  | 3 churn, 34 duplications, N/A complexity/method | 3 churn, 34 duplications, N/A complexity/method |
+| local_plan_steps_controller_test.rb  | 2 churn, 0 duplications,  N/A complexity/method | 3 churn, 34 duplications, N/A complexity/method |
+
 ## Branch Policy
 
 - sprint-x: This Branch must have the code ready and revised for the sprint delivery

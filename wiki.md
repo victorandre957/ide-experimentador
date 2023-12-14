@@ -87,13 +87,13 @@ Create interface for a user to create local activity plans
 
 - Responsible: Victor André
 
-|              File                    |                  After Refactor                 |                 Before Refactor                 |
-|--------------------------------------|-------------------------------------------------|-------------------------------------------------|
-| local_plan_steps_controller.rb       | 6 churn, 0 duplications, 8.6 complexity/method  | 6 churn, 0 duplications,  7.4 complexity/method |
-| local_plan_step.rb                   | 6 churn, 0 duplications, 82.0 complexity/method | 6 churn, 0 duplications,  6.7 complexity/method |
-| local_plan_steps.rb                  | 9 churn, 0 duplications,  N/A complexity/method | 9 churn, 0 duplications, 13.2 complexity/method |
-| local_plan_steps_controller_spec.rb  | 3 churn, 34 duplications, N/A complexity/method | 3 churn, 0 duplications, 19.1 complexity/method |
-| local_plan_steps_controller_test.rb  | 2 churn, 0 duplications,  N/A complexity/method | 1 churn, 0 duplications,  4.9 complexity/method |
+|              File                    |     After Refactor     |    Before Refactor     |
+|--------------------------------------|-------------------------------------------------|
+| local_plan_steps_controller.rb       | 8.6 complexity/method  | 7.4 complexity/method  |
+| local_plan_step.rb                   | 82.0 complexity/method | 6.7 complexity/method  |
+| local_plan_steps.rb                  | N/A complexity/method  | 13.2 complexity/method |
+| local_plan_steps_controller_spec.rb  | N/A complexity/method  | 19.1 complexity/method |
+| local_plan_steps_controller_test.rb  | N/A complexity/method  |  4.9 complexity/method |
 
 ## Branch Policy
 

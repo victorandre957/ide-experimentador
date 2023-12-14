@@ -110,7 +110,8 @@ Create interface for a user to create local activity plans
 | local_plan_step_private.rb     | - complexity   | 7 complexity    |
 
 ## Documentation Code (RDoc)
-  - Responsible: Victor André and Thiago Carrijo
+
+- Responsible: Victor André and Thiago Carrijo
 
 ## Branch Policy
 

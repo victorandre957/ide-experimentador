@@ -95,6 +95,9 @@ Create interface for a user to create local activity plans
 | local_plan_steps_controller_spec.rb  | N/A complexity/method  | 19.1 complexity/method |
 | local_plan_steps_controller_test.rb  | N/A complexity/method  |  4.9 complexity/method |
 
+## Documentation Code (RDoc)
+  - Responsible: Victor André and Thiago Carrijo
+
 ## Branch Policy
 
 - sprint-x: This Branch must have the code ready and revised for the sprint delivery

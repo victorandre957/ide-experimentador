@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Api::LocalPlanStepsController, type: :controller do
     describe '/GET #index' do
         it 'return status OK' do
-            get :index_by_robot
+            get :index_by_robot, params: { robot_id: 'some_id' }
             expect(response).to have_http_status(:ok)
         end
     end

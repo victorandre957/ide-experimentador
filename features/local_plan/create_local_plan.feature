@@ -8,7 +8,7 @@ Feature: Create a new local plan
     And I am creating a local plan for the robot "999"
     And fill in all the information
     And click "Confirm"
-    Then there should be LocalPlanSteps wiith robot_id: "999"
+    Then there should be LocalPlanSteps with robot_id: "999"
   @javascript
   Scenario: Test creating a new invalid plan
     Given that I am logged in

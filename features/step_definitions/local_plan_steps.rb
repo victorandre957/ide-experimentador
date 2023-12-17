@@ -12,11 +12,12 @@ And /^I am creating a local plan for the robot "([^"]*)"$/ do |page|
 end
 
 And /^fill in all the information$/ do
+  click_button 'Adicionar Passo'
   fill_in_information
 end
 
 And /^click "Confirm"$/ do
-  click_button 'Save'
+  click_button 'Salvar'
 end
 
 Then /^there should be LocalPlanSteps with robot_id: "([^"]*)"$/ do |robot_id|
@@ -25,7 +26,7 @@ end
 
 private
 
-def fill_in_information
+def fill_in_information()
   fill_in 'labelInput', with: 'StepName'
   select 'Navegação', from: 'skillSelect'
   fill_in 'Sala', with: 'RoomName'

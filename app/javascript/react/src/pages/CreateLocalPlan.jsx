@@ -8,10 +8,9 @@ let existPlan = false;
 const CreateLocalPlan = ({ robotId }) => {
   const [steps, setSteps] = useState([]);
 
-  let robotId = 22;
+  let robotId = 999;
 
-  if (robotId) {
-    alert();
+  if (false) {
     useEffect(() => {
       axios
         .get(`local_plan_steps/index_by_robot/${robotId}`)
@@ -55,7 +54,7 @@ const CreateLocalPlan = ({ robotId }) => {
       ? `/api/local_plan_steps/${robotId}`
       : "/api/local_plan_steps";
     
-    let robotId = 22
+    let robotId = 999
     
     if (!existPlan) {
       axios

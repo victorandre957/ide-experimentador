@@ -12,7 +12,21 @@ class Api::LocalPlanStepsController < ApplicationController
   end
 
   def create
-    render json: LocalPlanStep.create!(local_plan_step_create_params), status: :ok
+    local_plan_steps = params.require(:local_plan)
+    robot_id = params.require(:robot_Id)
+    created_steps = []
+  
+    LocalPlanStep.transaction do
+      local_plan_steps.each_with_index do |step_params, index|
+        step_params[:stepNumber] = index + 1
+        step_params[:robot_id] = robot_id
+        step = LocalPlanStep.new(local_plan_step_create_params(step_params))
+        step.save!
+        created_steps << step
+      end
+    end
+  
+    render json: created_steps, status: :ok
   rescue ActiveRecord::RecordInvalid => e
     render json: { message: e.message }, status: 422
   end
@@ -33,10 +47,9 @@ class Api::LocalPlanStepsController < ApplicationController
 
   private
 
-  def local_plan_step_create_params
-    par = params.require(:local_plan_step)
-    skill = par[:skill]
-
+  def local_plan_step_create_params(step_params)
+    skill = step_params[:skill]
+  
     case skill
     when 'navigation'
       parameter_content = [:room, waypoints: [:x, :y, :z]]
@@ -45,11 +58,11 @@ class Api::LocalPlanStepsController < ApplicationController
     when 'operate_drawer'
       parameter_content = [:action]
     else
-      # dont permit skill if not specified:
-      return par.permit(:label, :stepNumber, :robot_id)
+      # don't permit skill if not specified:
+      return step_params.permit(:label, :stepNumber, :robot_id)
     end
-
-    par.permit(:skill, :label, :stepNumber, :robot_id, parameter: parameter_content)
+  
+    step_params.permit(:skill, :label, :stepNumber, :robot_id, parameter: parameter_content)
   end
 
   def local_plan_step_update_params

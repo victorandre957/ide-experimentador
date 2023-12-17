@@ -8,6 +8,8 @@ let existPlan = false;
 const CreateLocalPlan = ({ robotId }) => {
   const [steps, setSteps] = useState([]);
 
+  let robotId = 22;
+
   if (robotId) {
     alert();
     useEffect(() => {
@@ -52,10 +54,12 @@ const CreateLocalPlan = ({ robotId }) => {
     const url = existPlan
       ? `/api/local_plan_steps/${robotId}`
       : "/api/local_plan_steps";
-    alert(existPlan);
+    
+    let robotId = 22
+    
     if (!existPlan) {
       axios
-        .post(url, { local_plan: steps })
+        .post(url, { local_plan: steps, robot_Id: robotId })
         .then((response) => {
           console.log("Passos salvos/atualizados com sucesso:", response.data);
         })
@@ -64,7 +68,7 @@ const CreateLocalPlan = ({ robotId }) => {
         });
     } else {
       axios
-        .update(url, { local_plan: steps })
+        .update(url, { local_plan: steps, robot_Id: robotId })
         .then((response) => {
           console.log("Passos salvos/atualizados com sucesso:", response.data);
         })

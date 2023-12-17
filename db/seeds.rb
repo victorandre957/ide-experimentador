@@ -36,7 +36,7 @@
 #     },
 #     "label":"navto_room"
 # },
-r = Robot.create!(id: 22)  #Na seed, é necessário trocar o Id do robô para não falhar na validação do robô
+r = Robot.create!()
 
 LocalPlanStep.create!(
     robot_id: r.id,

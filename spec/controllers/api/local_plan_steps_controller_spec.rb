@@ -38,14 +38,23 @@ describe Api::LocalPlanStepsController, type: :controller do
     end
     describe 'DELETE #delete' do
     let!(:robot) {Robot.create!()}
-    let!(:local_plan_step) { LocalPlanStep.create!(stepNumber: 1, label: 'Exemplo', parameters: 'Parâmetros', skill:"test", robot_id: robot.id) }
+    let!(:local_plan_step) { LocalPlanStep.create!(stepNumber:1, label:"navto_room", 
+    parameter: {
+      room: "PC Room 3",
+      waypoints: [
+        { x: -27.23, y: 18.0, z: -1.57 },
+        { x: -27.23, y: 16.0 },
+        { x: -28.5, y: 16.0 },
+        { x: -28.5, y: 18.0, z: -1.57 }
+      ]
+    }, skill:"navigation", robot_id: robot.id) }
     it 'delete a local plan' do
       delete :delete, params: { id: local_plan_step.id }
       expect(response).to have_http_status(:ok)
     end
 
     it 'return error if local plan dont exist' do
-      delete :delete, params: { id: nil }
+      delete :delete, params: { id: [-1] }
       expect(response).to have_http_status(:not_found)
     end
   end

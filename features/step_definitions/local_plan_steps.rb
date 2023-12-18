@@ -28,9 +28,10 @@ private
 
 def fill_in_information()
   fill_in 'labelInput', with: 'StepName'
-  select 'Aproximar-se de uma pessoa', from: 'skillSelect'
-  fill_in 'Tópico', with: 'RoomName'
-
+  select 'Navegação', from: 'skillSelect'
+  fill_in 'Sala', with: 'RoomName'
+  click_button 'Adicionar waypoint'
+  fill_in_coordinates(1.3, 2.2, 3.1)
 end
 
 def fill_in_coordinates(x, y, z)

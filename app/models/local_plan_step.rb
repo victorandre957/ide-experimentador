@@ -10,7 +10,7 @@ class ParameterValidator < ActiveModel::Validator
         elsif record.parameter.size != 2
           record.errors.add :base, "Wrong number of characteristics" 
 
-        elsif record.parameter["waypoints"].size != 4
+        elsif record.parameter["waypoints"].size != 1
           record.errors.add :base, "Incorrect number of waypoints" 
         end
 
@@ -22,7 +22,7 @@ class ParameterValidator < ActiveModel::Validator
       when "operate_drawer"   
         if  !(record.parameter.has_key?("action")) or record.parameter.size != 1
           record.errors.add :base, "Incorrect parameter formating"
-        elsif record.parameter["action"] != "open" or record.parameter["action"] != "close"
+        elsif record.parameter["action"] != "open" and record.parameter["action"] != "close"
           record.errors.add :base, "Incorrect action command"         
         end
 

@@ -52,17 +52,16 @@ class Api::LocalPlanStepsController < ApplicationController
   
     case skill
     when 'navigation'
-      parameter_content = [:room, waypoints: [:x, :y, :z]]
+      parameter_content = { parameter: [:room, waypoints: [:x, :y, :z]] }
     when 'approach_person', 'authenticate_person', 'send_message', 'wait_message', 'approach_robot'
-      parameter_content = [:topic]
+      parameter_content = { parameter: [:topic] }
     when 'operate_drawer'
-      parameter_content = [:action]
+      parameter_content = { parameter: [:action] }
     else
-      # don't permit skill if not specified:
       return step_params.permit(:label, :stepNumber, :robot_id)
     end
-  
-    step_params.permit(:skill, :label, :stepNumber, :robot_id, parameter: parameter_content)
+    
+    step_params.permit(:skill, :label, :stepNumber, :robot_id, parameter_content)
   end
 
   def local_plan_step_update_params

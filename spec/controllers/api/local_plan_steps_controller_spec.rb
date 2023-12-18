@@ -61,27 +61,33 @@ describe Api::LocalPlanStepsController, type: :controller do
   
   describe 'PATCH #update' do
     let!(:robot) {Robot.create!()}
-    let!(:local_plan_step) { LocalPlanStep.create!(stepNumber: 1, label: 'Exemplo', parameters: 'Parâmetros', skill:"test", robot_id: robot.id) }
+    let!(:local_plan_step) { LocalPlanStep.create!(stepNumber:1, label:"navto_room", 
+    parameter: {
+      room: "PC Room 3",
+      waypoints: [
+        { x: -27.23, y: 18.0, z: -1.57 },
+        { x: -27.23, y: 16.0 },
+        { x: -28.5, y: 16.0 },
+        { x: -28.5, y: 18.0, z: -1.57 }
+      ]
+    }, skill:"navigation", robot_id: robot.id) }
 
     it 'Update a local plan' do
       updated_params = { label: 'Novo Label' }
-
-      patch :update, params: { id: local_plan_step.id, local_plan_steps: updated_params }
-
+      patch :update, params: { id: local_plan_step.id, local_plan_step: updated_params }
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body)['label']).to eq('Novo Label')
     end
 
     it 'return a error if local_plan_step dont exist' do
-      patch :update, params: { id: nil , local_plan_steps: { label: 'Novo Label' } }
-
+      patch :update, params: { id: [-1] , local_plan_step: { label: 'Novo Label' } }
       expect(response).to have_http_status(:not_found)
     end
 
     it 'returns error if update fails' do
       allow_any_instance_of(LocalPlanStep).to receive(:update!).and_raise(ActiveRecord::RecordInvalid.new(LocalPlanStep.new))
-      patch :update, params: { id: local_plan_step.id, local_plan_steps: { label: 'Novo Label' } }
-      expect(response).to have_http_status(:bad_request)
+      patch :update, params: { id: local_plan_step.id, local_plan_step: { label: 'Novo Label' } }
+      expect(response).to have_http_status(:unprocessable_entity)
     end
   end
 end

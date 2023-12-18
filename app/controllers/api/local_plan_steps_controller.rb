@@ -12,7 +12,7 @@ class Api::LocalPlanStepsController < ApplicationController
   end
 
   def create
-    render json: LocalPlanStep.create!(local_plan_step_create_params), status: :ok
+    render json: LocalPlanStep.create!(local_plan_step_create_params), status: :created
   rescue ActiveRecord::RecordInvalid => e
     render json: { message: e.message }, status: 422
   end

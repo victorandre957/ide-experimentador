@@ -1,7 +1,6 @@
 class ParameterValidator < ActiveModel::Validator
   def validate(record)
-    puts record.parameter
-    puts record.skill
+
     case record.skill
       when "navigation"
         if  !(record.parameter.has_key?("room")) or !(record.parameter.has_key?("waypoints"))

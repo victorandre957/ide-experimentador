@@ -30,9 +30,9 @@ describe Api::LocalPlanStepsController, type: :controller do
         end
         context 'should create a plan with bad params' do
             it 'return status bad_request' do
-                local_plan_step_params = nil
-                get :create , params: {local_plan_steps: local_plan_step_params}
-                expect(response).to have_http_status(:bad_request)
+                local_plan_step_params[:stepNumber] = nil
+                post :create , params: {local_plan_step: local_plan_step_params}
+                expect(response).to have_http_status(:unprocessable_entity)
             end
         end
     end

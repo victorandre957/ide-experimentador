@@ -40,15 +40,15 @@ const CreateLocalPlan = ({}) => {
   };
 
   const handleDeletePlan = () => {
-    axios
-      .delete(`/api/local_plan_steps/${robotId}`, { robot_Id: robotId })
-      .then((response) => {
-        console.log("Plano do robô deletado com sucesso:", response.data);
-      })
-      .catch((error) => {
-        console.error("Erro ao deletar o plano do robô:", error);
-      });
-    setSteps([]);
+    const fetchPromise = axios.delete(`/api/local_plan_steps/${robotId}`, { robot_Id: robotId });
+    toast.promise(fetchPromise, {
+      loading: "Deletando Plano Local",
+      success: () => {
+        setSteps([]);
+        return "Plano Local criado com sucesso";
+      },
+      error: (err) => err.response?.data?.message || err.message,
+    });
   };
 
   const handleSave = () => {
@@ -63,7 +63,7 @@ const CreateLocalPlan = ({}) => {
       toast.promise(fetchPromise, {
         loading: "Criando Plano Local",
         success: "Plano Local criado com sucesso",
-        error: (err) => err.response.data.message,
+        error: (err) => err.response?.data?.message || err.message,
       });
     } else {
       fetchPromise = axios.update(url, {
@@ -74,7 +74,7 @@ const CreateLocalPlan = ({}) => {
       toast.promise(fetchPromise, {
         loading: "Atualizando o Plano Local",
         success: "Plano Local atualizado com sucesso",
-        error: (err) => err.response.data.message,
+        error: (err) => err.response?.data?.message || err.message,
       });
     }
   };

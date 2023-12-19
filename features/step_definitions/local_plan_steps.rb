@@ -1,6 +1,6 @@
 #Implementing the steps in create_local_plan.features
 # Scenario: Test creating a new valid plan
-Given /^that I am logged in$/ do
+Given /^that I am logged in/ do
   # Simulating logged-in state
   # To-Do
 end
@@ -103,27 +103,6 @@ end
 
 Then /^the deleted local plan should not appear on screen/ do
   #
-end
-
-#Scenario: Test cancelling the deletion process before deleting
-#Given that I am logged in
-#And there's an experiment with a robot with a local plan
-#And I'm on the "delete local plan" screen
-#When I change the plan
-#Or I select a "Cancel" option
-#And click on "Confirm"
-#Then the local plan should not be deleted
-Given /^that I am logged in/ do
-  # Simulating logged-in state
-  # To-Do
-end
-
-And /^there's an experiment with a robot with a local plan, robot with robot_id: "([^"]*)"$/ do |robot_id|
-  assert LocalPlanStep.where(robot_id: robot_id).count > 0
-end
-
-And /^I'm on the "delete local plan" screen/ do
-  click_button ""
 end
 
 private

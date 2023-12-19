@@ -34,9 +34,6 @@ const CreateLocalPlan = ({}) => {
   };
 
   const handleRemoveStep = (index) => {
-    axios.delete(`/api/local_plan_steps/step/${robotId}`, {
-      id: steps[index].id,
-    });
     setSteps(steps.filter((_, i) => i !== index));
   };
 

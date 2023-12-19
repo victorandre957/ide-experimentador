@@ -9,15 +9,15 @@ And /^there is a robot with id = "([^"]*)"$/ do |robot_id|
   Robot.create!(id: robot_id)
 end
 
-And /^I am creating a local plan for the robot "([^"]*)"$/ do |page|
-  visit "local_plan_steps/#{page}"
+And /^I am creating a local plan for the robot "999"/ do
+  visit "local_plan_steps/999"
 end
 
 And /^fill in all the information$/ do
   fill_in_information
 end
 
-And /^click "Confirm"$/ do
+And /^click "Confirm"/ do
   click_button 'Save'
 end
 
@@ -26,16 +26,16 @@ Then /^there should be LocalPlanSteps with robot_id: "([^"]*)"$/ do |robot_id|
 end
 ##
 
-And /^don't fill in all the information/ do
+And /^don't fill in all the information for the robot "([^"]*)"$/ do
   fill_in_incomplete
 end
 
-Then /^Then there shouldn't be LocalPlanSteps with robot_id: "([^"]*)"$/ do
+Then /^there shouldn't be LocalPlanSteps with robot_id: "([^"]*)"$/ do
   assert LocalPlanStep.where(robot_id: robot_id).count == 0
 end
 ##
 
-And /^there is an experiment with a robot, with id = "([^"]*)"$/ do |robot_id|
+And /^there's an experiment with a robot, with id = "([^"]*)"$/ do |robot_id|
   Robot.create!(id: robot_id)
 end
 

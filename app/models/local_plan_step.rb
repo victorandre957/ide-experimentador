@@ -10,7 +10,10 @@ class ParameterValidator < ActiveModel::Validator
         elsif record.parameter.size != 2
           record.errors.add :base, "Wrong number of characteristics" 
 
-        elsif record.parameter["waypoints"].size != 1
+        elsif record.parameter["waypoints"].size == 0
+          record.errors.add :base, "Incorrect number of waypoints" 
+        
+        elsif record.parameter["waypoints"].any? { |waypoint| !waypoint.key?("x") || !waypoint.key?("y") || !waypoint.key?("z") || waypoint["x"].to_s.empty? || waypoint["y"].to_s.empty? || waypoint["z"].to_s.empty? }
           record.errors.add :base, "Incorrect number of waypoints" 
         end
 

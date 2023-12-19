@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Graph.jsx - RDoc Documentation</title>
+<title>Hello.jsx - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../../../../";
@@ -92,13 +92,15 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page app/javascript/react/src/components/Graph.jsx">
+<main role="main" aria-label="Page app/javascript/react/src/components/Hello.jsx">
 
 <p>import React, {useEffect, useState} from ‘react’</p>
 
-<p>const Graph = (props) =&gt; {                                </p>
+<p>const Hello = (props) =&gt; {                                </p>
 
-<pre>let [count, setCount] = useState(0)
+<pre>let [count, setCount] = useState(2)
+let [req, setReq] = useState(&quot;&quot;) 
+
 useEffect(() =&gt; {
   fetch(&quot;/hello/worldGet&quot;).then(async res=&gt;{
     const parse = await res.text()
@@ -106,9 +108,11 @@ useEffect(() =&gt; {
     return parse
   }).then(res=&gt;setReq(res))
 }, [])
+
 return (
   &lt;div&gt;
-    &lt;h1&gt;Counter prop:{props.trialID}: {count}&lt;/h1&gt;
+    &lt;h1&gt;Counter prop:{props.name}: {count}&lt;/h1&gt;
+    &lt;h2&gt;{req}&lt;/h2&gt;
     &lt;button onClick={()=&gt;{
       setCount(count+1)
     }}&gt; Add &lt;/button&gt;
@@ -117,7 +121,7 @@ return (
 
 <p>}                                                    </p>
 
-<p>export default Graph</p>
+<p>export default Hello</p>
 
 </main>
 

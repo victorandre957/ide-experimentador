@@ -65,18 +65,21 @@
 </div>
 
     
-<div id="includes-section" class="nav-section">
-  <h3>Included Modules</h3>
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
 
-  <ul class="link-list">
-    <li><a class="include" href="../LocalPlanStepsIndex.html">LocalPlanStepsIndex</a>
-    <li><a class="include" href="../LocalPlanStepsActions.html">LocalPlanStepsActions</a>
-    <li><a class="include" href="../LocalPlanStepsPrivate.html">LocalPlanStepsPrivate</a>
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-create">#create</a>
+    <li ><a href="#method-i-delete">#delete</a>
+    <li ><a href="#method-i-delete_step">#delete_step</a>
+    <li ><a href="#method-i-index_by_robot">#index_by_robot</a>
+    <li ><a href="#method-i-update">#update</a>
   </ul>
 </div>
 
-    
-    
   </div>
 </nav>
 
@@ -87,9 +90,7 @@
 
   <section class="description">
     
-<p>controllers/api/local_plan_steps_controller.rb</p>
-
-<p>Controller responsible for handling API endpoints related to local plan steps.</p>
+<p>Controller responsible for managing LocalPlanSteps associated with a <a href="../Robot.html"><code>Robot</code></a> in the API.</p>
 
   </section>
 
@@ -98,6 +99,194 @@
 
 
 
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-create" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">create</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates local plan steps for a specific robot.</p>
+
+<p>POST /api/local_plan_steps/create @param <a href=":local_plan">params</a> [Array&lt;Hash&gt;] Array of parameters for creating local plan steps. @param <a href=":robot_Id">params</a> [String] The ID of the robot to associate the steps with. @return [JSON] Returns a JSON response containing the created steps.</p>
+
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File app/controllers/api/local_plan_steps_controller.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+  <span class="ruby-identifier">local_plan_steps</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:local_plan</span>)
+  <span class="ruby-identifier">robot_id</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:robot_Id</span>)
+  <span class="ruby-identifier">created_steps</span> = []
+
+  <span class="ruby-constant">LocalPlanStep</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">local_plan_steps</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">step_params</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">step_params</span>[<span class="ruby-value">:stepNumber</span>] = <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">step_params</span>[<span class="ruby-value">:robot_id</span>] = <span class="ruby-identifier">robot_id</span>
+      <span class="ruby-identifier">step</span> = <span class="ruby-constant">LocalPlanStep</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">local_plan_step_params</span>(<span class="ruby-identifier">step_params</span>))
+      <span class="ruby-identifier">step</span>.<span class="ruby-identifier">save!</span>
+      <span class="ruby-identifier">created_steps</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">step</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">created_steps</span>, <span class="ruby-value">status:</span> <span class="ruby-value">:ok</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterMissing</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> { <span class="ruby-value">message:</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span> }, <span class="ruby-value">status:</span> <span class="ruby-value">422</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordInvalid</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> { <span class="ruby-value">message:</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span> }, <span class="ruby-value">status:</span> <span class="ruby-value">422</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-delete" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">delete</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Deletes all local plan steps associated with a specific robot.</p>
+
+<p>DELETE /api/local_plan_steps/delete @param <a href=":robot_id">params</a> [String] The ID of the robot whose steps are to be deleted. @return [JSON] Returns a JSON response indicating successful deletion of steps.</p>
+
+          <div class="method-source-code" id="delete-source">
+            <pre><span class="ruby-comment"># File app/controllers/api/local_plan_steps_controller.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>
+  <span class="ruby-identifier">robot_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:robot_id</span>]
+  <span class="ruby-identifier">deleted_steps</span> = <span class="ruby-constant">LocalPlanStep</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">robot_id:</span> <span class="ruby-identifier">robot_id</span>).<span class="ruby-identifier">destroy_all</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> { <span class="ruby-value">message:</span> <span class="ruby-node">&quot;Deleted all steps associated with robot ID #{robot_id}&quot;</span> }, <span class="ruby-value">status:</span> <span class="ruby-value">:ok</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordNotFound</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> { <span class="ruby-value">message:</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span> }, <span class="ruby-value">status:</span> <span class="ruby-value">404</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-delete_step" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">delete_step</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Deletes a specific local plan step.</p>
+
+<p>DELETE /api/local_plan_steps/delete_step @param <a href=":id">params</a> [String] The ID of the step to be deleted. @return [JSON] Returns a JSON response indicating successful deletion of the step.</p>
+
+          <div class="method-source-code" id="delete_step-source">
+            <pre><span class="ruby-comment"># File app/controllers/api/local_plan_steps_controller.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_step</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+    <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-constant">LocalPlanStep</span>.<span class="ruby-identifier">destroy</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]), <span class="ruby-value">status:</span> <span class="ruby-value">:ok</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordNotFound</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> { <span class="ruby-value">message:</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span> }, <span class="ruby-value">status:</span> <span class="ruby-value">404</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-index_by_robot" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">index_by_robot</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Retrieves all local plan steps associated with a specific robot, ordered by step number.</p>
+
+<p>GET /api/local_plan_steps/index_by_robot @param <a href=":robot_id">params</a> [String] The ID of the robot to retrieve steps for. @return [JSON] Returns a JSON response containing the retrieved steps.</p>
+
+          <div class="method-source-code" id="index_by_robot-source">
+            <pre><span class="ruby-comment"># File app/controllers/api/local_plan_steps_controller.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index_by_robot</span>
+  <span class="ruby-comment"># Extracts the robot_id from parameters</span>
+  <span class="ruby-identifier">robot_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:robot_id</span>]
+  <span class="ruby-comment"># Fetches steps associated with the given robot and orders them by step number</span>
+  <span class="ruby-identifier">steps</span> = <span class="ruby-constant">LocalPlanStep</span>
+    .<span class="ruby-identifier">where</span>(<span class="ruby-value">robot_id:</span> <span class="ruby-identifier">robot_id</span>)
+    .<span class="ruby-identifier">order</span>(<span class="ruby-value">:stepNumber</span>)
+  <span class="ruby-comment"># Renders the steps as JSON with a successful status</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">steps</span>, <span class="ruby-value">status:</span> <span class="ruby-value">:ok</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-update" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">update</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Updates local plan steps associated with a specific robot.</p>
+
+<p>PUT /api/local_plan_steps/update @param <a href=":local_plan">params</a> [Array&lt;Hash&gt;] Array of parameters for updating local plan steps. @param <a href=":robot_Id">params</a> [String] The ID of the robot whose steps are being updated. @return [JSON] Returns a JSON response indicating successful step updates.</p>
+
+          <div class="method-source-code" id="update-source">
+            <pre><span class="ruby-comment"># File app/controllers/api/local_plan_steps_controller.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>
+  <span class="ruby-identifier">robot_id</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:robot_Id</span>)
+  <span class="ruby-identifier">local_plan_steps</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:local_plan</span>)
+
+  <span class="ruby-constant">LocalPlanStep</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-comment"># Delete steps not present in the updated list for the given robot</span>
+    <span class="ruby-constant">LocalPlanStep</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">robot_id:</span> <span class="ruby-identifier">robot_id</span>).<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-value">id:</span> <span class="ruby-identifier">local_plan_steps</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:id</span>)).<span class="ruby-identifier">destroy_all</span>
+
+    <span class="ruby-identifier">local_plan_steps</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">step_params</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">step_params</span>[<span class="ruby-value">:stepNumber</span>] = <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">step_params</span>[<span class="ruby-value">:robot_id</span>] = <span class="ruby-identifier">robot_id</span>
+
+      <span class="ruby-identifier">step</span> = <span class="ruby-constant">LocalPlanStep</span>.<span class="ruby-identifier">find_or_initialize_by</span>(<span class="ruby-value">id:</span> <span class="ruby-identifier">step_params</span>[<span class="ruby-value">:id</span>], <span class="ruby-value">robot_id:</span> <span class="ruby-identifier">robot_id</span>)
+      <span class="ruby-identifier">step</span>.<span class="ruby-identifier">assign_attributes</span>(<span class="ruby-identifier">local_plan_step_params</span>(<span class="ruby-identifier">step_params</span>))
+      <span class="ruby-identifier">step</span>.<span class="ruby-identifier">save!</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> { <span class="ruby-value">message:</span> <span class="ruby-node">&quot;Updated all steps associated with robot ID #{robot_id}&quot;</span> }, <span class="ruby-value">status:</span> <span class="ruby-value">:ok</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterMissing</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> { <span class="ruby-value">message:</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span> }, <span class="ruby-value">status:</span> <span class="ruby-value">400</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordInvalid</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> { <span class="ruby-value">message:</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span> }, <span class="ruby-value">status:</span> <span class="ruby-value">422</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordNotFound</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> { <span class="ruby-value">message:</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span> }, <span class="ruby-value">status:</span> <span class="ruby-value">404</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
 
   </section>
 </main>

@@ -65,17 +65,17 @@
 </div>
 
     
-<div id="includes-section" class="nav-section">
-  <h3>Included Modules</h3>
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
 
-  <ul class="link-list">
-    <li><a class="include" href="LocalPlanStepPublic.html">LocalPlanStepPublic</a>
-    <li><a class="include" href="LocalPlanStepPrivate.html">LocalPlanStepPrivate</a>
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-validate">#validate</a>
   </ul>
 </div>
 
-    
-    
   </div>
 </nav>
 
@@ -86,7 +86,7 @@
 
   <section class="description">
     
-<p>The ‘ParameterValidator` class extends ActiveModel::Validator and includes modules for both public and private local plan step parameter validation in the Rails application.</p>
+<p>Custom validator class to validate parameters based on skill types for a <a href="LocalPlanStep.html"><code>LocalPlanStep</code></a>.</p>
 
   </section>
 
@@ -95,6 +95,71 @@
 
 
 
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-validate" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">validate</span><span
+              class="method-args">(record)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Validates the parameters based on the skill type of the <a href="LocalPlanStep.html"><code>LocalPlanStep</code></a>.</p>
+
+<p>@param record [LocalPlanStep] The record to be validated.</p>
+
+          <div class="method-source-code" id="validate-source">
+            <pre><span class="ruby-comment"># File app/models/local_plan_step.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate</span>(<span class="ruby-identifier">record</span>)
+  <span class="ruby-comment"># Checks the skill type to validate parameters accordingly</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">skill</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;navigation&quot;</span>
+      <span class="ruby-comment"># Validates parameters for navigation skill</span>
+      <span class="ruby-keyword">if</span>  <span class="ruby-operator">!</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">parameter</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;room&quot;</span>)) <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">parameter</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;waypoints&quot;</span>))
+        <span class="ruby-identifier">record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> <span class="ruby-value">:base</span>, <span class="ruby-string">&quot;Incorrect parameter formating&quot;</span>    
+
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">parameter</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">2</span>
+        <span class="ruby-identifier">record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> <span class="ruby-value">:base</span>, <span class="ruby-string">&quot;Wrong number of characteristics&quot;</span> 
+
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">parameter</span>[<span class="ruby-string">&quot;waypoints&quot;</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> <span class="ruby-value">:base</span>, <span class="ruby-string">&quot;Incorrect number of waypoints&quot;</span> 
+      
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">parameter</span>[<span class="ruby-string">&quot;waypoints&quot;</span>].<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">waypoint</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">waypoint</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&quot;x&quot;</span>) <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">waypoint</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&quot;y&quot;</span>) <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">waypoint</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&quot;z&quot;</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">waypoint</span>[<span class="ruby-string">&quot;x&quot;</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">waypoint</span>[<span class="ruby-string">&quot;y&quot;</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">waypoint</span>[<span class="ruby-string">&quot;z&quot;</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> }
+        <span class="ruby-identifier">record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> <span class="ruby-value">:base</span>, <span class="ruby-string">&quot;Incorrect number of waypoints&quot;</span> 
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;approach_robot&quot;</span>, <span class="ruby-string">&quot;authenticate_person&quot;</span>, <span class="ruby-string">&quot;approach_person&quot;</span>, <span class="ruby-string">&quot;wait_message&quot;</span>, <span class="ruby-string">&quot;send_message&quot;</span>
+      <span class="ruby-comment"># Validates parameters for certain skill types</span>
+      <span class="ruby-keyword">if</span>  <span class="ruby-operator">!</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">parameter</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;topic&quot;</span>)) <span class="ruby-keyword">or</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">parameter</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> <span class="ruby-value">:base</span>, <span class="ruby-string">&quot;Incorrect parameter formating&quot;</span>       
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;operate_drawer&quot;</span>   
+      <span class="ruby-comment"># Validates parameters for operate_drawer skill</span>
+      <span class="ruby-keyword">if</span>  <span class="ruby-operator">!</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">parameter</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;action&quot;</span>)) <span class="ruby-keyword">or</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">parameter</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> <span class="ruby-value">:base</span>, <span class="ruby-string">&quot;Incorrect parameter formating&quot;</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">parameter</span>[<span class="ruby-string">&quot;action&quot;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;open&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">parameter</span>[<span class="ruby-string">&quot;action&quot;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;close&quot;</span>
+        <span class="ruby-identifier">record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> <span class="ruby-value">:base</span>, <span class="ruby-string">&quot;Incorrect action command&quot;</span>         
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> <span class="ruby-value">:base</span>, <span class="ruby-string">&quot;This skill is evil&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
 
   </section>
 </main>

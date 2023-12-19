@@ -1,29 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LocalPlanForm from "../components/LocalPlanForm";
-import styled from "styled-components";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-let existPlan = false;
-
 const CreateLocalPlan = ({}) => {
   const [steps, setSteps] = useState([]);
+  const [robotId, setRobotId] = useState(-1);
 
-  let robotId = 1;
+  useEffect(() => {
+    const path = window.location.pathname.split("/");
+    const robotId = Number(path[path.length - 1]);
+    setRobotId(robotId);
 
-  if (false) {
-    useEffect(() => {
+    if (!Number.isNaN(robotId)) {
       axios
-        .get(`local_plan_steps/index_by_robot/${robotId}`)
+        .get(`/api/local_plan_steps/index_by_robot/${robotId}`)
         .then((response) => {
-          existPlan = !!response.data.local_plan;
-          setSteps(response.data.local_plan || []);
+          setSteps(response.data);
         })
         .catch((error) => {
           console.error("Erro ao carregar os passos:", error);
         });
-    }, [robotId]);
-  }
+    }
+  }, []);
 
   const handleChange = (index, value) => {
     steps[index] = value;
@@ -39,43 +38,32 @@ const CreateLocalPlan = ({}) => {
   };
 
   const handleDeletePlan = () => {
-    axios
-      .delete(`local_plan_steps/${robotId}`, { robot_Id: robotId })
-      .then((response) => {
-        console.log("Plano do robô deletado com sucesso:", response.data);
-      })
-      .catch((error) => {
-        console.error("Erro ao deletar o plano do robô:", error);
-      });
-    setSteps([]);
+    const fetchPromise = axios.delete(`/api/local_plan_steps/${robotId}`, {
+      robot_Id: robotId,
+    });
+    toast.promise(fetchPromise, {
+      loading: "Deletando Plano Local",
+      success: () => {
+        setSteps([]);
+        return "Plano Local deletado com sucesso";
+      },
+      error: (err) => err.response?.data?.message || err.message,
+    });
   };
 
   const handleSave = () => {
-    const url = existPlan
-      ? `/api/local_plan_steps/${robotId}`
-      : "/api/local_plan_steps";
+    const url = `/api/local_plan_steps/${robotId}`;
 
-    let fetchPromise;
-    if (!existPlan) {
-      fetchPromise = axios.post(url, { local_plan: steps, robot_Id: robotId });
+    const fetchPromise = axios.put(url, {
+      local_plan: steps,
+      robot_Id: robotId,
+    });
 
-      toast.promise(fetchPromise, {
-        loading: "Criando Plano Local",
-        success: "Plano Local criado com sucesso",
-        error: (err) => err.response.data.message,
-      });
-    } else {
-      fetchPromise = axios.update(url, {
-        local_plan: steps,
-        robot_Id: robotId,
-      });
-
-      toast.promise(fetchPromise, {
-        loading: "Atualizando o Plano Local",
-        success: "Plano Local atualizado com sucesso",
-        error: (err) => err.response.data.message,
-      });
-    }
+    toast.promise(fetchPromise, {
+      loading: "Atualizando o Plano Local",
+      success: "Plano Local atualizado com sucesso",
+      error: (err) => err.response?.data?.message || err.message,
+    });
   };
 
   return (

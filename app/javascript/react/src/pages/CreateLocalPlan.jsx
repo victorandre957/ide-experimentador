@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LocalPlanForm from "../components/LocalPlanForm";
-import styled from "styled-components";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -8,22 +7,25 @@ let existPlan = false;
 
 const CreateLocalPlan = ({}) => {
   const [steps, setSteps] = useState([]);
+  const [robotId, setRobotId] = useState(-1);
 
-  let robotId = 1;
+  useEffect(() => {
+    const path = window.location.pathname.split("/");
+    const robotId = Number(path[path.length - 1]);
+    setRobotId(robotId);
 
-  if (false) {
-    useEffect(() => {
+    if (!Number.isNaN(robotId)) {
       axios
-        .get(`local_plan_steps/index_by_robot/${robotId}`)
+        .get(`/api/local_plan_steps/index_by_robot/${robotId}`)
         .then((response) => {
-          existPlan = !!response.data.local_plan;
-          setSteps(response.data.local_plan || []);
+          existPlan = !!response.data;
+          setSteps(response.data);
         })
         .catch((error) => {
           console.error("Erro ao carregar os passos:", error);
         });
-    }, [robotId]);
-  }
+    }
+  }, []);
 
   const handleChange = (index, value) => {
     steps[index] = value;
@@ -68,7 +70,7 @@ const CreateLocalPlan = ({}) => {
         error: (err) => err.response?.data?.message || err.message,
       });
     } else {
-      fetchPromise = axios.update(url, {
+      fetchPromise = axios.put(url, {
         local_plan: steps,
         robot_Id: robotId,
       });

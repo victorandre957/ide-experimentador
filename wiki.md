@@ -81,7 +81,10 @@ Create interface for a user to create local activity plans
 
 - Responsible: Arthur Henrique and Luiz Henrique
 - Story Points: 2
-- description: creates tests to ensure everything is correct,
+- description: creates tests to ensure everything is correct
+
+
+## Sprint 3
 
 ## ABC Score (method complexity < 20)
 
@@ -101,17 +104,28 @@ Create interface for a user to create local activity plans
 
 | File                           | After Refactor | Before Refactor |
 | ------------------------------ | -------------- | --------------- |
-| local_plan_steps_controller.rb | 16 complexity  | 0 complexity    |
-| local_plan_steps_actions.rb    | - complexity   | 5 complexity    |
-| local_plan_steps_index.rb      | - complexity   | 2 complexity    |
-| local_plan_steps_private.rb    | - complexity   | 6 complexity    |
-| local_plan_step.rb             | 10 complexity  | 0 complexity    |
-| local_plan_step_public.rb      | - complexity   | 4 complexity    |
-| local_plan_step_private.rb     | - complexity   | 7 complexity    |
+| local_plan_steps_controller.rb | 16 complexity  | 2 complexity    |
+| local_plan_step.rb             | 10 complexity  | 3 complexity    |
 
 ## Documentation Code (RDoc)
 
 - Responsible: Victor André and Thiago Carrijo
+
+## Regatoração das API
+
+- Responsible: Artur Padovesi and Victor André
+
+## Happy Path e Sad Path nas features do Cucumber
+
+- Responsible: Arthur Henrique e Gustavo de Paula
+
+## Cobertura dos testes (RSpec)
+
+- Responsible: Luiz Henrique
+
+| File                                |       Coverage         |
+| ----------------------------------- | ---------------------- |
+| local_plan_steps_controller.rb      |          96%           |
 
 ## Branch Policy
 

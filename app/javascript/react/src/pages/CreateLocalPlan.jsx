@@ -37,14 +37,12 @@ const CreateLocalPlan = ({}) => {
   };
 
   const handleRemoveStep = (index) => {
+    axios.delete(`/api/local_plan_steps/step/${robotId}`, { id: steps[index].id })
     setSteps(steps.filter((_, i) => i !== index));
   };
 
   const handleDeletePlan = () => {
-    const fetchPromise = axios.delete(`local_plan_steps/${robotId}`, {
-      robot_Id: robotId,
-    });
-
+    const fetchPromise = axios.delete(`/api/local_plan_steps/${robotId}`, { robot_Id: robotId });
     toast.promise(fetchPromise, {
       loading: "Deletando Plano Local",
       success: () => {

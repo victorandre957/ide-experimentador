@@ -34,7 +34,7 @@ class Api::LocalPlanStepsController < ApplicationController
   end
 
   def update
-    robot_id = params[:robot_id]
+    robot_id = params.require(:robot_Id)
     local_plan_steps = params.require(:local_plan)
 
     LocalPlanStep.transaction do
@@ -64,6 +64,14 @@ class Api::LocalPlanStepsController < ApplicationController
     robot_id = params[:robot_id]
     deleted_steps = LocalPlanStep.where(robot_id: robot_id).destroy_all
     render json: { message: "Deleted all steps associated with robot ID #{robot_id}" }, status: :ok
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { message: e.message }, status: 404
+  end
+
+  def delete_step
+    if (params[:id])
+      render json: LocalPlanStep.destroy(params[:id]), status: :ok
+    end
   rescue ActiveRecord::RecordNotFound => e
     render json: { message: e.message }, status: 404
   end

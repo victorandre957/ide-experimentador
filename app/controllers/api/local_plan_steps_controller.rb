@@ -39,11 +39,11 @@ class Api::LocalPlanStepsController < ApplicationController
       end
     end
   
-    render json: created_steps, status: :ok
+    render json: created_steps, status: :created
   rescue ActionController::ParameterMissing => e
     render json: { message: e.message }, status: 422
-  rescue ActiveRecord::RecordInvalid => e
-    render json: { message: e.message }, status: 422
+  rescue ActionRecord::RecordInvalid => e
+    render json: {message: e.message}, status: 422
   end
 
   # Updates local plan steps associated with a specific robot.

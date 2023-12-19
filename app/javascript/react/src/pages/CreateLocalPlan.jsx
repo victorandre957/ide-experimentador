@@ -39,7 +39,7 @@ const CreateLocalPlan = ({ robotId }) => {
 
   const handleDeletePlan = () => {
     axios
-      .delete(`local_plan_steps/${robotId}`)
+      .delete(`local_plan_steps/${robotId}`, { robot_Id: robotId })
       .then((response) => {
         console.log("Plano do robô deletado com sucesso:", response.data);
       })

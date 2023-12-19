@@ -16,7 +16,7 @@ Feature: Create a new local plan
     And there is a robot with id = "999"
     And I am creating a local plan for the robot "999"
     When I click “Create a local plan”
-    And don't fill in all the information for the robot "999"
+    And don't fill in all the information for the robot
     And click "Confirm"
     Then there shouldn't be LocalPlanSteps with robot_id: "999"
   @javascript

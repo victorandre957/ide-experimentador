@@ -18,7 +18,7 @@ And /^fill in all the information$/ do
 end
 
 And /^click "Confirm"/ do
-  click_button 'Save'
+  click_button 'Salvar Plano Local'
 end
 
 Then /^there should be LocalPlanSteps with robot_id: "([^"]*)"$/ do |robot_id|
@@ -26,11 +26,11 @@ Then /^there should be LocalPlanSteps with robot_id: "([^"]*)"$/ do |robot_id|
 end
 ##
 
-And /^don't fill in all the information for the robot "([^"]*)"$/ do
+And /^don't fill in all the information for the robot/ do
   fill_in_incomplete
 end
 
-Then /^there shouldn't be LocalPlanSteps with robot_id: "([^"]*)"$/ do
+Then /^there shouldn't be LocalPlanSteps with robot_id: "([^"]*)"$/ do |robot_id|
   assert LocalPlanStep.where(robot_id: robot_id).count == 0
 end
 ##
@@ -44,7 +44,7 @@ And /^I am on the "editing robot" page for a robot with id "([^"]*)"$/ do |robot
 end
 
 And /^click "Cancel"/ do
-  click_button 'Deletar Step'
+  click_button 'Deletar passo'
 end
 
 When /^I click “Create a local plan”/ do
@@ -60,7 +60,7 @@ And /^an execution plan exists in a robot with id "([^"]*)"$/ do |robot_id|
   Robot.create!(id: robot_id)
   visit "local_plan_steps/#{robot_id}"
   fill_in_information
-  click_button 'Save'
+  click_button 'Salvar Plano Local'
   assert LocalPlanStep.where(robot_id: robot_id).count > 0
 end
 
@@ -94,7 +94,7 @@ And /^I have successfully deleted an existing local plan/ do
   beginning_value = LocalPlanStep.where(robot_id: 999)
   visit "local_plan_steps/#{999}"
   fill_in_information
-  click_button 'Save'
+  click_button 'Adicionar Novo Passo'
 
   #Deletes the new local plan
   click 'Deletar Plano'

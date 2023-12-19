@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     get 'local_plan_steps/index_by_robot/:robot_id', to: "local_plan_steps#index_by_robot"
     post 'local_plan_steps', to: "local_plan_steps#create"
     put 'local_plan_steps/:id', to: "local_plan_steps#update"
-    delete 'local_plan_steps/:id', to: "local_plan_steps#delete"
+    delete 'local_plan_steps/:robot_id', to: "local_plan_steps#delete"
+    delete 'local_plan_steps/step/:robot_id', to: "local_plan_steps#delete_step"
   end
 
   get 'local_plan_steps/:robot_id', to: "local_plan_steps#index"

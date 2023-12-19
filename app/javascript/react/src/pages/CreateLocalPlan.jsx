@@ -14,7 +14,7 @@ const CreateLocalPlan = ({}) => {
   if (false) {
     useEffect(() => {
       axios
-        .get(`local_plan_steps/index_by_robot/${robotId}`)
+        .get(`/api/local_plan_steps/index_by_robot/${robotId}`)
         .then((response) => {
           existPlan = !!response.data.local_plan;
           setSteps(response.data.local_plan || []);
@@ -35,12 +35,13 @@ const CreateLocalPlan = ({}) => {
   };
 
   const handleRemoveStep = (index) => {
+    axios.delete(`/api/local_plan_steps/step/${robotId}`, { id: steps[index].id })
     setSteps(steps.filter((_, i) => i !== index));
   };
 
   const handleDeletePlan = () => {
     axios
-      .delete(`local_plan_steps/${robotId}`, { robot_Id: robotId })
+      .delete(`/api/local_plan_steps/${robotId}`, { robot_Id: robotId })
       .then((response) => {
         console.log("Plano do robô deletado com sucesso:", response.data);
       })

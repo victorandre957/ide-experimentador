@@ -67,6 +67,14 @@ class Api::LocalPlanStepsController < ApplicationController
   rescue ActiveRecord::RecordNotFound => e
     render json: { message: e.message }, status: 404
   end
+
+  def delete_step
+    if (params[:id])
+      render json: LocalPlanStep.destroy(params[:id]), status: :ok
+    end
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { message: e.message }, status: 404
+  end
   
   private
 

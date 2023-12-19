@@ -53,7 +53,7 @@ class Api::LocalPlanStepsController < ApplicationController
 
     render json: { message: "Updated all steps associated with robot ID #{robot_id}" }, status: :ok
     rescue ActionController::ParameterMissing => e
-      render json: { message: e.message }, status: 422
+      render json: { message: e.message }, status: 400
     rescue ActiveRecord::RecordInvalid => e
       render json: { message: e.message }, status: 422
     rescue ActiveRecord::RecordNotFound => e

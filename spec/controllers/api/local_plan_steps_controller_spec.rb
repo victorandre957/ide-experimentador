@@ -11,7 +11,7 @@ describe Api::LocalPlanStepsController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:valid_params) { { stepNumber: 10, label: 'teste', parameters: 'teste', skill: 'test', robot_id: robot.id } }
+    let(:valid_params) { { stepNumber: 10, label: 'teste', parameter: 'teste', skill: 'test', robot_id: robot.id } }
 
     it 'creates a local plan with valid params' do
       perform_create(valid_params)
@@ -75,7 +75,7 @@ describe Api::LocalPlanStepsController, type: :controller do
   end
 
   def create_local_plan_step
-    LocalPlanStep.create!(stepNumber: 1, label: 'Exemplo', parameters: 'Parâmetros', skill: 'test', robot_id: robot.id)
+    LocalPlanStep.create!(stepNumber: 1, label: 'Exemplo', parameter: 'Parâmetros', skill: 'test', robot_id: robot.id)
   end
 
   def expect_update_to_have_response(id, new_label, expected_status)

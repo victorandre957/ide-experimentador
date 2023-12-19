@@ -4,7 +4,7 @@ require "rails/test_help"
 require 'simplecov'
 puts "required simplecov"
 
-SimpleCov.start 'rails'
+SimpleCov.start
 
 module ActiveSupport
   class TestCase

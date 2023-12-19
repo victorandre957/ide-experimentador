@@ -3,17 +3,20 @@ import LocalPlanForm from "../components/LocalPlanForm";
 import styled from "styled-components";
 import axios from "axios";
 
-let steps = [];
 let existPlan = false;
 
 const CreateLocalPlan = ({ robotId }) => {
+  const [steps, setSteps] = useState([]);
 
-  if (robotId) {
+  let robotId = 999;
+
+  if (false) {
     useEffect(() => {
-      axios.get(`local_plan_steps/index_by_robot/${robotId}`)
+      axios
+        .get(`local_plan_steps/index_by_robot/${robotId}`)
         .then((response) => {
           existPlan = !!response.data.local_plan;
-          steps = (response.data.local_plan || []);
+          setSteps(response.data.local_plan || []);
         })
         .catch((error) => {
           console.error("Erro ao carregar os passos:", error);
@@ -22,40 +25,40 @@ const CreateLocalPlan = ({ robotId }) => {
   }
 
   const handleChange = (index, value) => {
-    const newSteps = [...steps];
-    newSteps[index] = value;
-    steps = [...newSteps];
+    steps[index] = value;
+    setSteps([...steps]);
   };
 
   const handleAddStep = () => {
-    steps = [...steps, { skill: "", label: "", parameter: {} }];
-    forceUpdate(); 
+    setSteps([...steps, { skill: "", label: "", parameter: {} }]);
   };
 
   const handleRemoveStep = (index) => {
-    const newSteps = steps.filter((_, i) => i !== index);
-    steps = [...newSteps];
-    forceUpdate(); 
+    setSteps(steps.filter((_, i) => i !== index));
   };
 
   const handleDeletePlan = () => {
-    steps = [];
-      axios.delete(`local_plan_steps/${robotId}`)
+    axios
+      .delete(`local_plan_steps/${robotId}`, { robot_Id: robotId })
       .then((response) => {
         console.log("Plano do robô deletado com sucesso:", response.data);
       })
       .catch((error) => {
         console.error("Erro ao deletar o plano do robô:", error);
       });
-    forceUpdate(); 
+    setSteps([]);
   };
 
   const handleSave = () => {
-    forceUpdate(); 
-    const url = existPlan ? `local_plan_steps/${robotId}` : 'local_plan_steps';
-
+    const url = existPlan
+      ? `/api/local_plan_steps/${robotId}`
+      : "/api/local_plan_steps";
+    
+    let robotId = 999
+    
     if (!existPlan) {
-      axios.create(url, { local_plan: steps })
+      axios
+        .post(url, { local_plan: steps, robot_Id: robotId })
         .then((response) => {
           console.log("Passos salvos/atualizados com sucesso:", response.data);
         })
@@ -63,7 +66,8 @@ const CreateLocalPlan = ({ robotId }) => {
           console.error("Erro ao salvar/atualizar os passos:", error);
         });
     } else {
-      axios.update(url, { local_plan: steps })
+      axios
+        .update(url, { local_plan: steps, robot_Id: robotId })
         .then((response) => {
           console.log("Passos salvos/atualizados com sucesso:", response.data);
         })
@@ -72,9 +76,6 @@ const CreateLocalPlan = ({ robotId }) => {
         });
     }
   };
-
-  const [, updateState] = useState();
-  const forceUpdate = () => updateState({});
 
   const TitleDiv = styled.div`
     display: flex;
@@ -88,11 +89,11 @@ const CreateLocalPlan = ({ robotId }) => {
     gap: 1rem;
   `;
   return (
-    <ContentDiv>
-      <TitleDiv>
+    <div>
+      <div>
         <h1>Criar uma sequência de passos</h1>
         <button onClick={handleDeletePlan}>Deletar Plano Local</button>
-      </TitleDiv>
+      </div>
       {steps.map((step, index) => (
         <LocalPlanForm
           key={index} // Adicione a chave única para cada Input
@@ -104,7 +105,7 @@ const CreateLocalPlan = ({ robotId }) => {
       ))}
       <button onClick={handleAddStep}>Adicionar Passo</button>
       <button onClick={handleSave}>Salvar</button>
-    </ContentDiv>
+    </div>
   );
 };
 

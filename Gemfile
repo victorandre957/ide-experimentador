@@ -73,7 +73,7 @@ group :test do
   gem "database_cleaner"
   gem "metric_fu-Saikuro"
   gem "rubycritic"
-  gem "simplecov"
+  gem 'simplecov', require: false
   gem "rdoc"
 end
 

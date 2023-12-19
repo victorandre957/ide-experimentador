@@ -1,0 +1,159 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/controllers/api/local_plan_steps_controller_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/controllers/hello_controller_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/controllers/local_plan_steps_controller_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/models/classification_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/models/experiment_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/models/factor_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/models/local_plan_step_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/models/robot_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/models/tag_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/models/trial_execution_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/models/trial_factor_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/models/trial_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/victor/Documentos/Unb/Eng-Software/ide-experimentador/test/models/user_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1702578522
+  }
+}

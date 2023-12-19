@@ -11,6 +11,10 @@ RSpec.configure do |config|
   config.render_views
 end
 
+require 'simplecov'
+SimpleCov.start 'rails' do
+  # Customize SimpleCov options here, if needed
+end
 
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

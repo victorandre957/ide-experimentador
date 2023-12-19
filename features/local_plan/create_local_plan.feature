@@ -6,6 +6,7 @@ Feature: Create a new local plan
     Given that I am logged in
     And there is a robot with id = "999"
     And I am creating a local plan for the robot "999"
+    When I click “Create a local plan”
     And fill in all the information
     And click "Confirm"
     Then there should be LocalPlanSteps with robot_id: "999"
@@ -14,6 +15,7 @@ Feature: Create a new local plan
     Given that I am logged in
     And there is a robot with id = "999"
     And I am creating a local plan for the robot "999"
+    When I click “Create a local plan”
     And don't fill in all the information for the robot "999"
     And click "Confirm"
     Then there shouldn't be LocalPlanSteps with robot_id: "999"

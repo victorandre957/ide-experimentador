@@ -3,8 +3,6 @@ import LocalPlanForm from "../components/LocalPlanForm";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-let existPlan = false;
-
 const CreateLocalPlan = ({}) => {
   const [steps, setSteps] = useState([]);
   const [robotId, setRobotId] = useState(-1);
@@ -18,7 +16,6 @@ const CreateLocalPlan = ({}) => {
       axios
         .get(`/api/local_plan_steps/index_by_robot/${robotId}`)
         .then((response) => {
-          existPlan = !!response.data;
           setSteps(response.data);
         })
         .catch((error) => {
@@ -37,48 +34,39 @@ const CreateLocalPlan = ({}) => {
   };
 
   const handleRemoveStep = (index) => {
-    axios.delete(`/api/local_plan_steps/step/${robotId}`, { id: steps[index].id })
+    axios.delete(`/api/local_plan_steps/step/${robotId}`, {
+      id: steps[index].id,
+    });
     setSteps(steps.filter((_, i) => i !== index));
   };
 
   const handleDeletePlan = () => {
-    const fetchPromise = axios.delete(`/api/local_plan_steps/${robotId}`, { robot_Id: robotId });
+    const fetchPromise = axios.delete(`/api/local_plan_steps/${robotId}`, {
+      robot_Id: robotId,
+    });
     toast.promise(fetchPromise, {
       loading: "Deletando Plano Local",
       success: () => {
         setSteps([]);
-        return "Plano Local criado com sucesso";
+        return "Plano Local deletado com sucesso";
       },
       error: (err) => err.response?.data?.message || err.message,
     });
   };
 
   const handleSave = () => {
-    const url = existPlan
-      ? `/api/local_plan_steps/${robotId}`
-      : "/api/local_plan_steps";
+    const url = `/api/local_plan_steps/${robotId}`;
 
-    let fetchPromise;
-    if (!existPlan) {
-      fetchPromise = axios.post(url, { local_plan: steps, robot_Id: robotId });
+    const fetchPromise = axios.put(url, {
+      local_plan: steps,
+      robot_Id: robotId,
+    });
 
-      toast.promise(fetchPromise, {
-        loading: "Criando Plano Local",
-        success: "Plano Local criado com sucesso",
-        error: (err) => err.response?.data?.message || err.message,
-      });
-    } else {
-      fetchPromise = axios.put(url, {
-        local_plan: steps,
-        robot_Id: robotId,
-      });
-
-      toast.promise(fetchPromise, {
-        loading: "Atualizando o Plano Local",
-        success: "Plano Local atualizado com sucesso",
-        error: (err) => err.response?.data?.message || err.message,
-      });
-    }
+    toast.promise(fetchPromise, {
+      loading: "Atualizando o Plano Local",
+      success: "Plano Local atualizado com sucesso",
+      error: (err) => err.response?.data?.message || err.message,
+    });
   };
 
   return (

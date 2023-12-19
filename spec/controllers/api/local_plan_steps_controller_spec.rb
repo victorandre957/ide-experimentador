@@ -86,6 +86,7 @@ describe Api::LocalPlanStepsController, type: :controller do
             local_plan_step_params[:parameter] = {action: "open"}
             post :create, params: {local_plan_step: local_plan_step_params}
               expect(response).to have_http_status(:created)
+
                 
           end
       end
@@ -301,20 +302,20 @@ describe Api::LocalPlanStepsController, type: :controller do
     }, skill:"navigation", robot_id: robot.id) }
 
     it 'Update a local plan' do
-      updated_params = { label: 'Novo Label' }
+      updated_params = { label: 'New Label' }
       patch :update, params: { id: local_plan_step.id, local_plan_step: updated_params }
       expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body)['label']).to eq('Novo Label')
+      expect(JSON.parse(response.body)['label']).to eq('New Label')
     end
 
     it 'return a error if local_plan_step dont exist' do
-      patch :update, params: { id: [-1] , local_plan_step: { label: 'Novo Label' } }
+      patch :update, params: { id: [-1] , local_plan_step: { label: 'New Label' } }
       expect(response).to have_http_status(:not_found)
     end
 
     it 'returns error if update fails' do
       allow_any_instance_of(LocalPlanStep).to receive(:update!).and_raise(ActiveRecord::RecordInvalid.new(LocalPlanStep.new))
-      patch :update, params: { id: local_plan_step.id, local_plan_step: { label: 'Novo Label' } }
+      patch :update, params: { id: local_plan_step.id, local_plan_step: { label: 'New Label' } }
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end

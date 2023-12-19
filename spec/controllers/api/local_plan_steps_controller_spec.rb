@@ -10,22 +10,23 @@ describe Api::LocalPlanStepsController, type: :controller do
     describe '/GET #create' do
         let!(:robot) {Robot.create!()}
         let!(:local_plan_step_params) do
-            {stepNumber:1, label:"navto_room", 
+            { local_plan:[{stepNumber:1, label:"navto_room", 
             parameter: {
               room: "PC Room 3",
               waypoints: [
                 { x: -27.23, y: 18.0, z: -1.57 },
-                { x: -27.23, y: 16.0 },
-                { x: -28.5, y: 16.0 },
+                { x: -27.23, y: 16.0, z: -1.50 },
+                { x: -28.5, y: 16.0, z: -1.50 },
                 { x: -28.5, y: 18.0, z: -1.57 }
               ]
-            }, skill:"navigation", robot_id: robot.id}
+            }, skill:"navigation"}], robot_Id: robot.id}
         end
         context 'should create a plan with good params(skill: navigation)' do
             it 'return status created' do
-                post :create, params: {local_plan_step: local_plan_step_params}
-                    expect(response).to have_http_status(:created)
-                  #  expect { post :create, params: { local_plan_step: local_plan_step_params } }.to change(LocalPlanStep, :count).by(1)
+                post :create, params:  local_plan_step_params
+                p ("aquiiiiiiiiiiiiiiii")
+                p(response)
+                expect(response).to have_http_status(:created)
             end
         end
         context 'should create a plan with good params(skill: approach_robot)' do
@@ -33,7 +34,7 @@ describe Api::LocalPlanStepsController, type: :controller do
             local_plan_step_params[:skill] = "approach_robot"
             local_plan_step_params[:label] = "approach_arm"
             local_plan_step_params[:parameter] = {topic: "lab_arm"}
-            post :create, params: {local_plan_step: local_plan_step_params}
+            post :create, params: local_plan_step_params
               expect(response).to have_http_status(:created)
                 
           end
@@ -43,7 +44,7 @@ describe Api::LocalPlanStepsController, type: :controller do
             local_plan_step_params[:skill] = "authenticate_person"
             local_plan_step_params[:label] = "authenticate_nurse"
             local_plan_step_params[:parameter] = {topic: "nurse"}
-            post :create, params: {local_plan_step: local_plan_step_params}
+            post :create, params: local_plan_step_params
               expect(response).to have_http_status(:created)
                 
           end
@@ -53,7 +54,7 @@ describe Api::LocalPlanStepsController, type: :controller do
             local_plan_step_params[:skill] = "approach_person"
             local_plan_step_params[:label] = "approach_nurse"
             local_plan_step_params[:parameter] = {topic: "nurse"}
-            post :create, params: {local_plan_step: local_plan_step_params}
+            post :create, params: local_plan_step_params
               expect(response).to have_http_status(:created)
                 
           end
@@ -63,7 +64,7 @@ describe Api::LocalPlanStepsController, type: :controller do
             local_plan_step_params[:skill] = "wait_message"
             local_plan_step_params[:label] = "wait_nurse_to_complete_deposit"
             local_plan_step_params[:parameter] = {topic: "nurse"}
-            post :create, params: {local_plan_step: local_plan_step_params}
+            post :create, params: local_plan_step_params
               expect(response).to have_http_status(:created)
                 
           end
@@ -154,8 +155,8 @@ describe Api::LocalPlanStepsController, type: :controller do
           it 'return status unprocessable_entity' do
             local_plan_step_params[:parameter] = {invalid: "PC room 3", invalid: [
               { x: -27.23, y: 18.0, z: -1.57 },
-              { x: -27.23, y: 16.0 },
-              { x: -28.5, y: 16.0 },
+              { x: -27.23, y: 16.0, z: -1.50 },
+              { x: -28.5, y: 16.0, z: -1.50 },
               { x: -28.5, y: 18.0, z: -1.57 }]}
             post :create , params: {local_plan_step: local_plan_step_params}
             expect(response).to have_http_status(:unprocessable_entity)
@@ -270,8 +271,8 @@ describe Api::LocalPlanStepsController, type: :controller do
       room: "PC Room 3",
       waypoints: [
         { x: -27.23, y: 18.0, z: -1.57 },
-        { x: -27.23, y: 16.0 },
-        { x: -28.5, y: 16.0 },
+        { x: -27.23, y: 16.0, z: -1.50 },
+        { x: -28.5, y: 16.0, z: -1.50 },
         { x: -28.5, y: 18.0, z: -1.57 }
       ]
     }, skill:"navigation", robot_id: robot.id) }
@@ -293,8 +294,8 @@ describe Api::LocalPlanStepsController, type: :controller do
       room: "PC Room 3",
       waypoints: [
         { x: -27.23, y: 18.0, z: -1.57 },
-        { x: -27.23, y: 16.0 },
-        { x: -28.5, y: 16.0 },
+        { x: -27.23, y: 16.0, z: -1.50 },
+        { x: -28.5, y: 16.0, z: -1.50 },
         { x: -28.5, y: 18.0, z: -1.57 }
       ]
     }, skill:"navigation", robot_id: robot.id) }

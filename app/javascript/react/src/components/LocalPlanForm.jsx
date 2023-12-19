@@ -279,7 +279,7 @@ const LocalPlanForm = ({ step, stepIndex, onRemove, onChange }) => {
               style={{ borderRadius: "0.375rem", padding: "0.5rem" }}
               type="text"
               value={formParams.parameter[key] || ""}
-              placeholder={"Tópico"}
+              placeholder="Tópico"
               onChange={(e) => handleInputChange(key, e.target.value)}
             />
           </NavDiv>

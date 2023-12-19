@@ -80,4 +80,4 @@ Capybara.configure do |config|
   config.server_port = '3000'
 end
 
-Capybara.javascript_driver = :selenium_remote_chrome
+# Capybara.javascript_driver = :selenium_remote_chrome

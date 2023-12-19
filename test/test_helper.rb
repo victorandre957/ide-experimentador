@@ -1,6 +1,10 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
+require 'simplecov'
+puts "required simplecov"
+
+SimpleCov.start
 
 module ActiveSupport
   class TestCase

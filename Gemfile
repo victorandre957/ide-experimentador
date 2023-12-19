@@ -63,7 +63,6 @@ group :development do
 end
 
 group :test do
-  gem 'cucumber-rails'
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
@@ -72,6 +71,10 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "database_cleaner"
+  gem "metric_fu-Saikuro"
+  gem "rubycritic"
+  gem 'simplecov', require: false
+  gem "rdoc"
 end
 
 gem "tailwindcss-rails", "~> 2.0"

@@ -1,6 +1,7 @@
 class ParameterValidator < ActiveModel::Validator
   def validate(record)
 
+
     case record.skill
       when "navigation"
         if  !(record.parameter.has_key?("room")) or !(record.parameter.has_key?("waypoints"))
@@ -9,7 +10,10 @@ class ParameterValidator < ActiveModel::Validator
         elsif record.parameter.size != 2
           record.errors.add :base, "Wrong number of characteristics" 
 
-        elsif record.parameter["waypoints"].size != 4
+        elsif record.parameter["waypoints"].size == 0
+          record.errors.add :base, "Incorrect number of waypoints" 
+        
+        elsif record.parameter["waypoints"].any? { |waypoint| !waypoint.key?("x") || !waypoint.key?("y") || !waypoint.key?("z") || waypoint["x"].to_s.empty? || waypoint["y"].to_s.empty? || waypoint["z"].to_s.empty? }
           record.errors.add :base, "Incorrect number of waypoints" 
         end
 
@@ -21,7 +25,7 @@ class ParameterValidator < ActiveModel::Validator
       when "operate_drawer"   
         if  !(record.parameter.has_key?("action")) or record.parameter.size != 1
           record.errors.add :base, "Incorrect parameter formating"
-        elsif record.parameter["action"] != "open" or record.parameter["action"] != "close"
+        elsif record.parameter["action"] != "open" and record.parameter["action"] != "close"
           record.errors.add :base, "Incorrect action command"         
         end
 

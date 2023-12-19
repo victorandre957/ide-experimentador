@@ -3,11 +3,11 @@
 one:
   stepNumber: 1
   label: MyString
-  parameters: 
+  parameter: {}
   robot: one
 
 two:
   stepNumber: 1
   label: MyString
-  parameters: 
+  parameter: {}
   robot: two

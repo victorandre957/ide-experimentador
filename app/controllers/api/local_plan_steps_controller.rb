@@ -34,7 +34,7 @@ class Api::LocalPlanStepsController < ApplicationController
   end
 
   def update
-    robot_id = params[:robot_id]
+    robot_id = params.require(:robot_Id)
     local_plan_steps = params.require(:local_plan)
 
     LocalPlanStep.transaction do

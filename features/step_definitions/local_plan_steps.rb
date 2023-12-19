@@ -47,6 +47,9 @@ And /^click "Cancel"/ do
   click_button 'Deletar Step'
 end
 
+When /^I click “Create a local plan”/ do
+ click_button 'Adicionar Novo Passo'
+end
 ###
 
 Given /^there is a method capable of deleting an existing execution plan/ do

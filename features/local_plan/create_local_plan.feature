@@ -12,14 +12,13 @@ Feature: Create a new local plan
   @javascript
   Scenario: Test creating a new invalid plan
     Given that I am logged in
-    And there's an experiment with a robot
-    And I am on the "editing robot"
-    When I click “Create a local plan”
-    And don't fill in all the information
+    And there is a robot with id = "999"
+    And I am creating a local plan for the robot "999"
+    And don't fill in all the information for the robot "999"
     And click "Confirm"
-    Then an error message should be displayed due to missing information
+    Then there shouldn't be LocalPlanSteps with robot_id: "999"
   @javascript
-  Scenario: Test creating a new invalid plan
+  Scenario: Test a new invalid plan with a non-existing skill
     Given that I am logged in
     And there's an experiment with a robot
     And I am on the "editing robot"
@@ -46,4 +45,3 @@ Feature: Create a new local plan
     And click "Cancel"
     Then I should be redirected to the "initial" page
     And there should be the text "Local plan's edition cancelled"
-

@@ -24,6 +24,25 @@ Then /^there should be LocalPlanSteps with robot_id: "([^"]*)"$/ do |robot_id|
   assert LocalPlanStep.where(robot_id: robot_id).count > 0
 end
 
+And /^don't fill in all the information for the robot "([^"]*)"$/ do |robot_id|
+  @before = LocalPlanStep.where(robot_id: robot_id).count
+  click_button 'Adicionar Passo'
+  # The step name won't be filled
+  select 'Navegação', from: 'skillSelect'
+  fill_in 'Sala', with: 'RoomName'
+  click_button 'Adicionar waypoint'
+  fill_in 'x', with: 'asd'
+  fill_in 'y', with: "efg"
+  # The coordinate Z won't be filled
+end
+
+Then /^there shouldn't be LocalPlanSteps with robot_id: "([^"]*)"$/ do |robot_id|
+  after = LocalPlanStep.where(robot_id: robot_id).count
+  puts @before
+  puts after
+  assert @before == after
+end
+
 private
 
 def fill_in_information()

@@ -2,71 +2,71 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const StepDiv = styled.div`
-display: flex;
-flex-direction: column;
-gap: 0.5rem;
-width: 100%;
-padding: 2rem;
-width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 2rem;
+  width: 50%;
 `;
 
 const ParameterDiv = styled.div`
-margin-left: 2rem;
-margin-top: 0.5rem;
-display: flex;
-flex-direction: column;
-border-left: 2px solid black;
-padding-left: 0.5rem;
-padding-top: 0.5rem;
-gap: 1rem;
-items-align: start;
+  margin-left: 2rem;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid black;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  gap: 1rem;
+  items-align: start;
 `;
 
 const TitleParameterDiv = styled.div`
-color: #808080;
+  color: #808080;
 `;
 
 const RoomDiv = styled.div`
-display: flex;
-justify-content: space-between;
-gap: 3rem;
-align-items: center;
-width: 50%;
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  align-items: center;
+  width: 50%;
 `;
 
 const RoomContentDiv = styled.div`
-display: flex;
-flex-direction: column;
-gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const NavDiv = styled.div`
-display: flex;
-flex-direction: column;
-gap: 1rem;
-margin-left: 2rem;
-padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-left: 2rem;
+  padding-bottom: 1rem;
 `;
 
 const WaypointsContentDiv = styled.div`
-display: flex;
-flex-direction: column;
-margin-left: 2rem;
-width: 60%;
-gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+  width: 60%;
+  gap: 0.5rem;
 `;
 
 const WaypointsDiv = styled.div`
-display: flex;
-flex-direction: column;
-gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 `;
 
 const WaypointDiv = styled.div`
-width: 100%;
+  width: 100%;
 `;
 
-const LocalPlanForm = ({ step, stepIndex, onRemove, onChange }) => {
+const LocalPlanStepForm = ({ step, stepIndex, onRemove, onChange }) => {
   const [selectedSkill, setSelectedSkill] = useState("");
   const [formParams, setFormParams] = useState({
     skill: "",
@@ -82,7 +82,7 @@ const LocalPlanForm = ({ step, stepIndex, onRemove, onChange }) => {
   const handleSkillChange = (e) => {
     const _skill = e.target.value;
     const updatedParams = { ...formParams, skill: _skill, parameter: {} };
-    if(_skill === "navigation") {
+    if (_skill === "navigation") {
       updatedParams.parameter = { room: "", waypoints: [] };
     }
     onChange(stepIndex, updatedParams);
@@ -362,4 +362,4 @@ const LocalPlanForm = ({ step, stepIndex, onRemove, onChange }) => {
   return <div>{renderFormInputs()}</div>;
 };
 
-export default LocalPlanForm;
+export default LocalPlanStepForm;

@@ -1,10 +1,10 @@
 import { define } from "remount";
 // import Hello from "./components/Hello"
 // import Graph from "./components/Graph"
-import CreateLocalPlan from "./pages/CreateLocalPlan";
+import LocalPlanPage from "./pages/LocalPlanPage";
 import { wrapWithQueryProvider } from "./wrapWithQueryProvider";
 
 // define({ 'hello-component': Hello, 'graph-component': Graph })
 define({
-  "create-local-plan-component": wrapWithQueryProvider(CreateLocalPlan),
+  "create-local-plan-component": wrapWithQueryProvider(LocalPlanPage),
 });

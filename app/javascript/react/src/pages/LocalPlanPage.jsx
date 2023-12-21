@@ -3,10 +3,7 @@ import { DeleteLocalPlanButton, LocalPlan } from "../components/LocalPlan";
 import { StyledToaster } from "../components/StyledToaster";
 import { useLocalPlan } from "../hooks/useLocalPlan";
 
-const LocalPlanPage = ({}) => {
-  const path = window.location.pathname.split("/");
-  const robotId = Number(path[path.length - 1]);
-
+const LocalPlanPage = ({ robotId }) => {
   const [steps, setSteps] = useLocalPlan(robotId);
 
   return (

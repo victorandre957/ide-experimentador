@@ -6,5 +6,13 @@ import { wrapWithQueryProvider } from "./wrapWithQueryProvider";
 
 // define({ 'hello-component': Hello, 'graph-component': Graph })
 define({
-  "create-local-plan-component": wrapWithQueryProvider(LocalPlanPage),
+  "create-local-plan-component": wrapWithQueryProvider(() =>
+    LocalPlanPage({
+      robotId: Number(
+        window.location.pathname.split("/")[
+          window.location.pathname.split("/").length - 1
+        ]
+      ),
+    })
+  ),
 });
